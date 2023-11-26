@@ -29,6 +29,6 @@
     ".next/types/**/*.ts",
     "app/lib/placeholder-data.js",
     "scripts/seed.js"
-  ],
+, "app/Signin/page.jsx", "app/ui/Signin/page.jsx", "app/product/[id]/loading.jsx", "app/page.jsx"  ],
   "exclude": ["node_modules"]
 }
