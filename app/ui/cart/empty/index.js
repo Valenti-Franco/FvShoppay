@@ -3,12 +3,14 @@ import styles from "./styles.module.scss";
 import { useSession, signIn } from "next-auth/react";
 import Link from "next/link";
 import img from "../../../../public/empty.png"
+import Image from "next/image";
+
 export default function Empty() {
   const { data: session } = useSession();
 
   return (
     <div className={styles.empty}>
-      <img src={img.src} alt="" />
+      <Image width={100} height={100} src={img.src} alt="" />
       <h1>Cart is empty</h1>
       {!session && (
         <Link href={"/Signin"}>

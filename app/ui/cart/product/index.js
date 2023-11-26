@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateCart } from "../../../../store/cartSlice";
 import storeImg from "../../../../public/store.webp"
 import { useState, useEffect } from "react";
+import Image from "next/image";
 export default function Product({ product, selected, setSelected }) {
   const { cart } = useSelector((state) => ({ ...state }));
   const [active, setActive] = useState();
@@ -51,7 +52,7 @@ export default function Product({ product, selected, setSelected }) {
     <div className={`${styles.card} ${styles.product}`}>
       {product.quantity < 1 && <div className={styles.blur}></div>}
       <div className={styles.product__header}>
-        <img src={storeImg.src} alt="" />
+        <Image width={50} height={50} src={storeImg.src} alt="" />
         FV Official Store
       </div>
       <div className={styles.product__image}>

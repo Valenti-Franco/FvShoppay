@@ -7,7 +7,7 @@ const nextConfig = {
         prependData: `@import "./base.scss";`,
     },
     images: {
-        domains: ["navajafina.netlify.app", "www.tailwind-kit.com", "ae01.alicdn.com"],
+        domains: ["navajafina.netlify.app", "www.tailwind-kit.com", "ae01.alicdn.com", "res.cloudinary.com", "img.ltwebstatic.com", "ae03.alicdn.com"],
     },
     important: true,
     // Active dark mode on class basis

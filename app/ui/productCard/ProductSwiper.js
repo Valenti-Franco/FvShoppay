@@ -11,6 +11,7 @@ import "swiper/css/navigation";
 // import required modules
 import { Autoplay } from "swiper";
 import { useEffect } from "react";
+import Image from "next/image";
 export default async function ProductSwiper({ images }) {
   const swiperRef = useRef(null);
   useEffect(() => {
@@ -37,7 +38,7 @@ export default async function ProductSwiper({ images }) {
       >
         {images.map((img, index) => (
           <SwiperSlide key={img.id}>
-            <img style={{ objectFit: "cover" }} src={img.url} alt="" />
+            <Image width={400} height={400} style={{ objectFit: "cover" }} src={img.url} alt="" />
           </SwiperSlide>
         ))}
       </Swiper>

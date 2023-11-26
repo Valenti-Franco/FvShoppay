@@ -19,7 +19,7 @@ const ImgComponent = ({ images, activeImg }) => {
             largeImage: {
               src: activeImg || images[active]?.url,
               width: 1500,
-              height: 2000,
+              height: 1500,
             },
             enlargedImageContainerDimensions: {
               width: "200%",

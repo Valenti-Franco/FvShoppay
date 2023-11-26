@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { paymentMethods } from "../../../data/paymentMethods";
 
 // import data from "../../../../public/checkout/"
@@ -33,13 +34,13 @@ export default function Payment({ paymentMethod, setPaymentMethod, profile }) {
 
           }
 
-          <img src={`../../../../checkout/${pm.id}.webp`} alt={pm.name} />
+          <Image width={100} height={100} src={`/checkout/${pm.id}.webp`} alt={pm.name} />
           <div className={styles.payment__item_col}>
             <span>Pay with {pm.name}</span>
             <p>
               {pm.images.length > 0
                 ? pm.images.map((img) => (
-                  <img key={img} src={`../../../../payment/${img}.webp`} alt="" />
+                  <Image width={100} height={100} key={img} src={`/payment/${img}.webp`} alt="" />
                 ))
                 : pm.description}
             </p>

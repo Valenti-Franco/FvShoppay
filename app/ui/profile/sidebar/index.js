@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { sidebarData } from "../../../data/profile";
 import Item from "./Item";
 import styles from "./styles.module.scss";
@@ -7,7 +8,7 @@ export default function Sidebar({ data }) {
   return (
     <div className={styles.sidebar}>
       <div className={styles.sidebar__container}>
-        <img src={data?.imagen?.url} alt="" />
+        <Image width={100} height={100} src={data?.imagen?.url} alt="" />
         <span className={styles.sidebar__name}>{data.nombre}</span>
         <ul>
           {sidebarData.map((item, i) => (

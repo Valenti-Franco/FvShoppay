@@ -15,6 +15,7 @@ import "swiper/css/navigation";
 // import ima from '../../../public/swiper'
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper";
+import Image from "next/image";
 function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -40,7 +41,7 @@ export default async function MainSwiper() {
         {/* <h1>hola</h1> */}
         {[...Array(10).keys()].map((i, index) => (
           <SwiperSlide key={index}>
-            <img src={`/swiper/${i + 1}.jpg`} alt="" />
+            <Image width={300} height={200} src={`/swiper/${i + 1}.jpg`} alt="" />
           </SwiperSlide>
         ))}
       </Swiper>

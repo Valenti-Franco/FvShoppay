@@ -11,8 +11,10 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 // import required modules
+
 import { Navigation } from "swiper";
 import Link from "next/link";
+import Image from "next/image";
 export default function SimillarSwiper() {
   return (
     <Swiper
@@ -32,7 +34,7 @@ export default function SimillarSwiper() {
       {simillar_products.map((p, index) => (
         <SwiperSlide key={index}>
           <Link href="">
-            <img src={p} alt="" />
+            <Image width={100} height={100} src={p} alt="" />
           </Link>
         </SwiperSlide>
       ))}
