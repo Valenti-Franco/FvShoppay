@@ -2,7 +2,7 @@
 
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Infos from "./Infos";
+import Infos from "./infos/Infos";
 import MainSwiper from "./mainSwiper";
 import styles from "../../../styles/product.module.scss";
 import { useParams } from "next/navigation";

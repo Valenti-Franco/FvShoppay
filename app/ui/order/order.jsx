@@ -59,7 +59,7 @@ export default function Order() {
   }, [session]);
 
   const postPaypalOrden = async () => {
-    console.log(id.id);
+    // console.log(id.id);
     try {
       const response = await axios.post(
         `https://fvshoppay.somee.com/Paypal/OrdenCompra/${id.id}`,
@@ -226,7 +226,7 @@ export default function Order() {
           </div>
           <div className={styles.order__actions}>
             <div className={styles.order__address}>
-              <h1>Customer's Order</h1>
+              <h1>Customer´s Order</h1>
               <div className={styles.order__address_user}>
                 <div className={styles.order__address_user_infos}>
                   <img src={session.user.imagen.url} alt="" />
@@ -240,7 +240,7 @@ export default function Order() {
                 <h2>Shipping Address</h2>
                 {session.user.dirreccion.map((dirreccion) =>
                   dirreccion.acitvo ? (
-                    <div>
+                    <div key={dirreccion.id}>
                       <span>
                         {dirreccion.nombre} {dirreccion.apellido}
                       </span>

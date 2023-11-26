@@ -15,8 +15,8 @@ export default async function Category({ header, products, background }) {
         <BsArrowRightCircle />
       </div>
       <div className={styles.category__products}>
-        {products.slice(0, 6).map((product) => (
-          <div className={styles.product}>
+        {products.slice(0, 6).map((product, index) => (
+          <div key={index} className={styles.product}>
             <img src={product.image} alt="" />
           </div>
         ))}

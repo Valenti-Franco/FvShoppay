@@ -7,15 +7,15 @@ export default function Copyright({ country }) {
       <section>©2022 SHOPPAY All Rights Resereved.</section>
       <section>
         <ul>
-          {data.map((link) => (
-            <li>
+          {data.map((link, index) => (
+            <li key={link.name + " " + index}>
               <Link href={link.link}>{link.name}</Link>
             </li>
           ))}
           <li>
             <a>
               <IoLocationSharp /> {country.name}
-              
+
             </a>
           </li>
         </ul>

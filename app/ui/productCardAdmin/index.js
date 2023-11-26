@@ -43,7 +43,7 @@ export default function ProductCard({ category, products }) {
         }}
       >
         {filteredProducts.map((product, i) => (
-          <SwiperSlide>
+          <SwiperSlide key={product.id}>
             <div className={styles.product__item}>
               <div className={styles.product__item_img}>
                 <img src={product.imagenes[0]?.url} alt="" />

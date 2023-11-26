@@ -52,7 +52,7 @@ export default async function FlashDeals() {
       >
         <div className={styles.flashDeals__list}>
           {flashDealsArray.map((product, i) => (
-            <SwiperSlide>
+            <SwiperSlide key={i}>
               <FlashCard product={product} key={i} />
             </SwiperSlide>
           ))}

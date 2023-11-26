@@ -41,7 +41,7 @@ export default function ProductsSwiper({ header, products, bg }) {
         }}
       >
         {products.map((product) => (
-          <SwiperSlide>
+          <SwiperSlide key={product.id}>
             <div className={styles.product}>
               <div className={styles.product__img}>
                 <img src={product.image} alt="" />
@@ -58,7 +58,7 @@ export default function ProductsSwiper({ header, products, bg }) {
           </SwiperSlide>
         ))}
       </Swiper>
-     
+
     </div>
   );
 }

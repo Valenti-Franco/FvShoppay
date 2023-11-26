@@ -35,8 +35,8 @@ export default async function ProductSwiper({ images }) {
         speed={500}
         modules={[Autoplay]}
       >
-        {images.map((img) => (
-          <SwiperSlide>
+        {images.map((img, index) => (
+          <SwiperSlide key={img.id}>
             <img style={{ objectFit: "cover" }} src={img.url} alt="" />
           </SwiperSlide>
         ))}

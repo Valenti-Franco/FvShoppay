@@ -1,4 +1,4 @@
-import Link from "next/Link";
+
 import { simillar_products } from "../../../data/products";
 import styles from "./styles.module.scss";
 import { useRef, useState } from "react";
@@ -12,6 +12,7 @@ import "swiper/css/navigation";
 
 // import required modules
 import { Navigation } from "swiper";
+import Link from "next/link";
 export default function SimillarSwiper() {
   return (
     <Swiper
@@ -28,8 +29,8 @@ export default function SimillarSwiper() {
         },
       }}
     >
-      {simillar_products.map((p) => (
-        <SwiperSlide>
+      {simillar_products.map((p, index) => (
+        <SwiperSlide key={index}>
           <Link href="">
             <img src={p} alt="" />
           </Link>

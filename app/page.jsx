@@ -37,7 +37,7 @@ import Link from "next/link";
 // import { Suspense, useEffect } from 'react';
 import ContentLoader from "react-content-loader";
 import { Suspense } from "react";
-export default async function Page() {
+export default function Page() {
   const { data: session, status } = useSession();
 
   // const [products, setProducts] = useState([])
