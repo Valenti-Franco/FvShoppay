@@ -2,6 +2,7 @@ import axios from "axios"
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 
+
 const handler = NextAuth({
     providers: [
         CredentialsProvider({
@@ -38,7 +39,7 @@ const handler = NextAuth({
                 );
                 console.log(res2)
                 const user = res2.data
-                console.log(user)
+
                 // If no error and we have user data, return it
                 if (user) {
                     user.token = res.data; // Agrega el token a las propiedades del usuario
@@ -61,6 +62,7 @@ const handler = NextAuth({
     pages: {
         signIn: "/signin", // Ruta a tu página de inicio de sesión personalizada
     },
+    secret: process.env.JWT_SECRET
 })
 
 export { handler as GET, handler as POST }
