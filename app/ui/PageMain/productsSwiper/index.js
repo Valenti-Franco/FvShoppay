@@ -10,7 +10,7 @@ function delay(ms) {
 }
 
 export default async function ProductsSwiper({ header, products, bg }) {
-  await delay(30);
+
   return (
     <div className={styles.wrapper}>
       {header && (

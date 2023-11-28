@@ -37,48 +37,16 @@ import Link from "next/link";
 // import { Suspense, useEffect } from 'react';
 import ContentLoader from "react-content-loader";
 import { Suspense } from "react";
+import HeaderPlaceHolder from "./ui/PageMain/HeaderPlaceHolder";
+import MenuPlaceHolder from "./ui/PageMain/MenuPlaceHolder";
+import OffersPlaceHolder from "./ui/PageMain/OffersPlaceHolder";
+import MainSwiperPlaceHolder from "./ui/PageMain/MainSwiperPlaceHolder";
+import UserPlaceHolder from "./ui/PageMain/UserPlaceHolder";
+
+import FlashDealsPlaceHolder from "./ui/flashDeals/flashPlaceHolder";
+
 export default function Page() {
   const { data: session, status } = useSession();
-
-  // const [products, setProducts] = useState([])
-  // const [loadingProducts, setLoadingProducts] = useState(true);
-  // const [category, setCategory] = useState([])
-
-  // useEffect(() => {
-  //   const fetchProducts = async () => {
-  //     try {
-  //       // await new Promise(resolve => (resolve, 40000))
-  //       const response = await axios.get("https://fvshoppay.somee.com/api/Productos");
-  //       console.log(response);
-  //       setProducts(response.data);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }finally {
-  //       // Set loading to false whether the request succeeds or fails
-  //       setLoadingProducts(false);
-  //     }
-  //   };
-
-  //   const fetchCategory = async () => {
-  //     try {
-  //       const responseCategory = await axios.get("https://fvshoppay.somee.com/api/Category");
-  //       console.log(responseCategory);
-  //       setCategory(responseCategory.data);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
-
-  //   // Invoca la función para que se ejecute
-  //   fetchProducts();
-
-  //   fetchCategory()
-  // }, []); // Asegúrate de pasar un arreglo vacío como dependencia si solo quieres que se ejecute una vez al montar el componente
-
-  // console.log(products);
-  // console.log(category);
-
-  // Resto del código...
 
   const country = {
     name: "Morocco",
@@ -89,30 +57,30 @@ export default function Page() {
   return (
     <div>
       <div className={styles.main}>
-        <Suspense fallback={<div>Loaging..</div>}>
+        <Suspense fallback={<HeaderPlaceHolder />}>
           <Header />
         </Suspense>
 
-        <Suspense fallback={<div>Loaging..</div>}>
+        <Suspense fallback={<MenuPlaceHolder />}>
           <Menu />
         </Suspense>
-        <Suspense fallback={<div>Loaging..</div>}>
+        <Suspense fallback={<MainSwiperPlaceHolder />}>
           <MainSwiper />
         </Suspense>
-        <Suspense fallback={<div>Loaging..</div>}>
+        <Suspense fallback={<OffersPlaceHolder />}>
           <Offers />
         </Suspense>
-        <Suspense fallback={<div>Loaging..</div>}>
+        <Suspense fallback={<UserPlaceHolder />}>
           <User />
         </Suspense>
       </div>
 
-      <Suspense fallback={<div>Loaging..</div>}>
+      <Suspense fallback={<FlashDealsPlaceHolder />}>
         <FlashDeals />
       </Suspense>
 
       <div className=" flex justify-around  max-md:flex-col ">
-        <Suspense fallback={<div>Loaging..</div>}>
+        <Suspense fallback={<FlashDealsPlaceHolder />}>
           <Category
             header="Dresses"
             products={women_dresses}
@@ -121,7 +89,7 @@ export default function Page() {
         </Suspense>
 
         {!isMedium && (
-          <Suspense fallback={<div>Loaging..</div>}>
+          <Suspense fallback={<FlashDealsPlaceHolder />}>
             <Category
               header="Shoes"
               products={women_shoes}
@@ -130,7 +98,7 @@ export default function Page() {
           </Suspense>
         )}
         {isMobile && (
-          <Suspense fallback={<div>Loaging..</div>}>
+          <Suspense fallback={<FlashDealsPlaceHolder />}>
             <Category
               header="Shoes"
               products={women_shoes}
@@ -138,7 +106,7 @@ export default function Page() {
             />
           </Suspense>
         )}
-        <Suspense fallback={<div>Loaging..</div>}>
+        <Suspense fallback={<FlashDealsPlaceHolder />}>
           <Category
             header="Accessories"
             products={women_accessories}
@@ -146,21 +114,21 @@ export default function Page() {
           />
         </Suspense>
       </div>
-      <Suspense fallback={<div>Loaging..</div>}>
+      <Suspense fallback={<FlashDealsPlaceHolder />}>
         <ProductsSwiper
           products={women_swiper}
           header="For Women"
           bg="#ff82ff"
         />
       </Suspense>
-      <Suspense fallback={<div>Loaging..</div>}>
+      <Suspense fallback={<FlashDealsPlaceHolder />}>
         <ProductsSwiper
           products={gamingSwiper}
           header="For Gamers"
           bg="#2f82ff"
         />
       </Suspense>
-      <Suspense fallback={<div>Loaging..</div>}>
+      <Suspense fallback={<FlashDealsPlaceHolder />}>
         <ProductsSwiper
           products={homeImprovSwiper}
           header="House Improvements"
@@ -176,30 +144,6 @@ export default function Page() {
         <Suspense
           fallback={
             <div className="flex">
-              <SwiperSlide style={{ width: "300px" }}>
-                <ContentLoader
-                  speed={2}
-                  width={290}
-                  height={450}
-                  viewBox="0 0 290 400"
-                  backgroundColor="#dfdddd"
-                  foregroundColor="#d0cdcf"
-                >
-                  <rect x="1" y="-1" rx="25" ry="25" width="290" height="380" />
-                </ContentLoader>
-              </SwiperSlide>
-              <SwiperSlide style={{ width: "300px" }}>
-                <ContentLoader
-                  speed={2}
-                  width={290}
-                  height={450}
-                  viewBox="0 0 290 400"
-                  backgroundColor="#dfdddd"
-                  foregroundColor="#d0cdcf"
-                >
-                  <rect x="1" y="-1" rx="25" ry="25" width="290" height="380" />
-                </ContentLoader>
-              </SwiperSlide>
               <SwiperSlide style={{ width: "300px" }}>
                 <ContentLoader
                   speed={2}

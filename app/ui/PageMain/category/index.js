@@ -7,7 +7,7 @@ function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 export default async function Category({ header, products, background }) {
-  await delay(30);
+
 
   return (
     <div className={styles.category} style={{ background: `${background}` }}>

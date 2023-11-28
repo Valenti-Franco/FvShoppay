@@ -20,7 +20,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default async function Offers() {
-  await delay(70);
+
   // console.log(offersAarray)
   return (
     // <> xd</>

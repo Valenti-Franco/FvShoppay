@@ -7,12 +7,19 @@ import Summary from "./summary";
 import { useSession } from "next-auth/react";
 import { useSelector } from "react-redux";
 import Products from "./products";
+import { useRouter } from "next/navigation";
 
 const PageCheckout = () => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [addresses, setAddresses] = useState([]);
   const { cart } = useSelector((state) => ({ ...state }));
+  const router = useRouter();
 
+  if (!session) {
+    // Redirect to sign-in page if not authenticated
+    router.replace("/Signin");
+    return null;
+  }
   // console.log(session);
   useEffect(() => {
     setAddresses(session?.user?.dirreccion);

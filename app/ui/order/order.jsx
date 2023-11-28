@@ -4,7 +4,7 @@ import styles from "../../../styles/order.module.scss";
 // import Order from "../../models/Order";
 // import User from "../../models/User";
 import { IoIosArrowForward } from "react-icons/io";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 // import db from "../../utils/db";
 // import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 import { useReducer, useEffect, useState } from "react";
@@ -30,6 +30,7 @@ export default function Order() {
   const { data: session, status } = useSession();
   const [orderData, setOrderData] = useState("");
   const id = useParams();
+  const Router = useRouter();
   //   console.log(session);
 
   useEffect(() => {
@@ -57,7 +58,21 @@ export default function Order() {
       fetchData();
     }
   }, [session]);
-
+  const DeletePaypalOrden = async () => {
+    try {
+      const response = await axios.delete(
+        `https://fvshoppay.somee.com/api/OrdenCompra/${id.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${session?.user.token}`,
+          },
+        } // Agrega el encabezado con el token JWT
+      );
+      Router.push("/profile/orders");
+    } catch (error) {
+      console.error(error);
+    }
+  };
   const postPaypalOrden = async () => {
     // console.log(id.id);
     try {
@@ -295,6 +310,26 @@ export default function Order() {
                       ></path>
                     </svg>
                     Check out with PayPal
+                  </button>
+                  <button
+                    onClick={DeletePaypalOrden}
+                    class="inline-flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-md"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5 mr-2"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                      />
+                    </svg>
+                    Delete
                   </button>
                 </div>
 

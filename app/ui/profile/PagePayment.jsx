@@ -2,10 +2,17 @@ import Layout from "./layout/PageLayout";
 import Payment from "../checkout/payment";
 import styles from "../../../styles/profile.module.scss";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default async function PagePayment() {
   //   const { data: session, status } = useSession();
-
+  const router = useRouter();
+  const { data: session, status } = useSession();
+  if (!session) {
+    // Redirect to sign-in page if not authenticated
+    router.replace("/Signin");
+    return null;
+  }
   return (
     // <Layout session={session.user}>
     <>

@@ -5,10 +5,16 @@ import Shipping from "../checkout/shipping";
 import styles from "../../../styles/profile.module.scss";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 export default function PageProfile() {
+  const router = useRouter();
   const { data: session, status } = useSession();
-
+  if (!session) {
+    // Redirect to sign-in page if not authenticated
+    router.replace("/Signin");
+    return null;
+  }
   return (
     <>
       <div className={styles.header}>
@@ -34,7 +40,7 @@ export default function PageProfile() {
           }}
         >
           <img
-            src={session.user.imagen.url}
+            src={session?.user?.imagen?.url}
             alt="Profile Image"
             style={{
               height: "100%",
@@ -64,7 +70,7 @@ export default function PageProfile() {
             >
               Name:
             </span>
-            <span style={{ fontSize: "18px" }}>{session.user.nombre}</span>
+            <span style={{ fontSize: "18px" }}>{session?.user?.nombre}</span>
           </div>
           <div
             style={{
@@ -82,7 +88,7 @@ export default function PageProfile() {
             >
               Email:
             </span>
-            <span style={{ fontSize: "18px" }}>{session.user.email}</span>
+            <span style={{ fontSize: "18px" }}>{session?.user?.email}</span>
           </div>
         </div>
       </div>

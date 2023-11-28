@@ -20,7 +20,7 @@ function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 export default async function MainSwiper() {
-  await delay(40);
+  // await delay(3000);
   return (
     <>
       <Swiper
@@ -41,7 +41,7 @@ export default async function MainSwiper() {
         {/* <h1>hola</h1> */}
         {[...Array(10).keys()].map((i, index) => (
           <SwiperSlide key={index}>
-            <Image width={300} height={200} src={`/swiper/${i + 1}.jpg`} alt="" />
+            <Image width={600} height={500} src={`/swiper/${i + 1}.jpg`} alt="" />
           </SwiperSlide>
         ))}
       </Swiper>

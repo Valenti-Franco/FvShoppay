@@ -20,7 +20,7 @@ export default async function ProductCard() {
 
   return (
 
-    <div className="flex">
+    <div className="flex flex-wrap justify-center">
 
       {products.map(product => (
         <SwiperSlide key={product.id} style={{ width: "300px" }} >

@@ -5,10 +5,19 @@ import Shipping from "../checkout/shipping";
 import styles from "../../../styles/profile.module.scss";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 export default function PageAddress() {
   const { data: session, status } = useSession();
   const [addresses, setAddresses] = useState();
+
+  const router = useRouter();
+
+  if (!session) {
+    // Redirect to sign-in page if not authenticated
+    router.replace("/Signin");
+    return null;
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,9 +41,8 @@ export default function PageAddress() {
     };
 
     // Llamar a la función asíncrona
-    if (status === "authenticated") {
-      fetchData();
-    }
+
+    fetchData();
   }, [session]);
 
   return (

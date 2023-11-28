@@ -27,18 +27,7 @@ export default function Infos({ product, setActiveImg }) {
   const [success, setSuccess] = useState("");
   const { cart } = useSelector((state) => ({ ...state }));
 
-  // useEffect(() => {
-  //   dispatch(hideDialog());
-  // }, []);
-  // useEffect(() => {
-  //   setSize("");
-  //   setQty(1);
-  // }, [router.query.style]);
-  // useEffect(() => {
-  //   if (qty > product.quantity) {
-  //     setQty(product.quantity);
-  //   }
-  // }, [router.query.size]);
+
   const addToCartHandler = async () => {
     // if (!router.query.size) {
     //   setError("Please Select a size");
@@ -93,40 +82,43 @@ export default function Infos({ product, setActiveImg }) {
         return signIn();
       }
 
-      const { data } = await axios.put("/api/user/wishlist", {
-
-        product_id: product._id,
-        style: product.style,
-
-
-
-
-
-      });
-
-      dispatch(
-        showDialog({
-          header: "Product Added to Wishlist Successfully",
-          msgs: [
-            {
-              msg: data.message,
-              type: "success",
-            },
-          ],
-        })
+      // Check if the product is already in the wishlist
+      const wishlistProducts = await axios.get(
+        "https://fvshoppay.somee.com/api/Usuarios/Favoritos/Usuario",
+        {
+          headers: {
+            Authorization: `Bearer ${session?.user.token}`,
+          },
+        }
       );
+
+      const isProductInWishlist = wishlistProducts.data.some(
+        (wishlistItem) => wishlistItem.producto.id === product.id
+      );
+
+      if (isProductInWishlist) {
+        console.log("Product already in wishlist, do nothing")
+        return;
+      }
+
+      // Add the product to the wishlist
+      const { data } = await axios.post(
+        "https://fvshoppay.somee.com/api/Usuarios/Favorito",
+        {
+          productoId: product.id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${session?.user.token}`,
+          },
+        }
+      );
+
+      // Handle the response if needed
+
     } catch (error) {
-      dispatch(
-        showDialog({
-          header: "Wishlist Error",
-          msgs: [
-            {
-              msg: error.response.data.message,
-              type: "error",
-            },
-          ],
-        })
-      );
+      console.log("non")
+      console.log(error)
     }
   };
   console.log(product.sumaDePuntos)

@@ -17,6 +17,7 @@ import FlashCard from "./Card";
 
 export default async function FlashDeals() {
 
+
   return (
     <div className={styles.flashDeals}>
       <div className={styles.flashDeals__header}>

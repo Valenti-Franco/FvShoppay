@@ -20,7 +20,6 @@ import { HiOutlineHome } from "react-icons/hi";
 import { AiOutlineSecurityScan } from "react-icons/ai";
 import { BsPhoneVibrate } from "react-icons/bs";
 
-
 //-------
 export default async function Menu() {
 

@@ -15,10 +15,15 @@ import verficado from "../../../public/verified.png";
 import UnVerficado from "../../../public/unverified.png";
 
 export default function PageOrders() {
-  const { data: session, status } = useSession();
   const [orders, setOrders] = useState([]);
-  const router = useRouter();
 
+  const router = useRouter();
+  const { data: session, status } = useSession();
+  if (status === "unauthenticated") {
+    // Redirect to sign-in page if not authenticated
+    router.replace("/Signin");
+    return null;
+  }
   useEffect(() => {
     const fetchData = async () => {
       try {
