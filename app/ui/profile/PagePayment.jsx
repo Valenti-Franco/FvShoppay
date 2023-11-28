@@ -1,11 +1,10 @@
-import Layout from "./layout/PageLayout";
+"use client";
 import Payment from "../checkout/payment";
 import styles from "../../../styles/profile.module.scss";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
-export default async function PagePayment() {
-  //   const { data: session, status } = useSession();
+export default function PagePayment() {
   const router = useRouter();
   const { data: session, status } = useSession();
   if (!session) {
