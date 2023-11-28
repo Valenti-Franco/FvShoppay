@@ -10,6 +10,10 @@ import Products from "./products";
 import { useRouter } from "next/navigation";
 
 const PageCheckout = () => {
+  useEffect(() => {
+    setAddresses(session?.user?.dirreccion);
+  }, [session]);
+
   const { data: session, status } = useSession();
   const [addresses, setAddresses] = useState([]);
   const { cart } = useSelector((state) => ({ ...state }));
@@ -21,9 +25,7 @@ const PageCheckout = () => {
     return null;
   }
   // console.log(session);
-  useEffect(() => {
-    setAddresses(session?.user?.dirreccion);
-  }, [session]);
+
   //   console.log("cart --->", cart.cartItems);
   return (
     <>

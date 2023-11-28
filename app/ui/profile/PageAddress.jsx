@@ -8,17 +8,6 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 
 export default function PageAddress() {
-  const { data: session, status } = useSession();
-  const [addresses, setAddresses] = useState();
-
-  const router = useRouter();
-
-  if (!session) {
-    // Redirect to sign-in page if not authenticated
-    router.replace("/Signin");
-    return null;
-  }
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -44,6 +33,16 @@ export default function PageAddress() {
 
     fetchData();
   }, [session]);
+  const { data: session, status } = useSession();
+  const [addresses, setAddresses] = useState();
+
+  const router = useRouter();
+
+  if (!session) {
+    // Redirect to sign-in page if not authenticated
+    router.replace("/Signin");
+    return null;
+  }
 
   return (
     <>
