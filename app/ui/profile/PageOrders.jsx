@@ -19,7 +19,7 @@ export default function PageOrders() {
     const fetchData = async () => {
       try {
         const ordersData = await axios.get(
-          `https://fvshoppay.somee.com/api/OrdenCompra/usuario/${session.user.id}`,
+          `https://fvecommerce.somee.com/api/OrdenCompra/usuario/${session.user.id}`,
           {
             headers: {
               Authorization: `Bearer ${session?.user.token}`,

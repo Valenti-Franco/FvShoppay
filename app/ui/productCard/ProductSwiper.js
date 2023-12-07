@@ -1,3 +1,4 @@
+"use client"
 import styles from "./styles.module.scss";
 import { useRef, useState } from "react";
 // Import Swiper React components
@@ -12,7 +13,7 @@ import "swiper/css/navigation";
 import { Autoplay } from "swiper";
 import { useEffect } from "react";
 import Image from "next/image";
-export default async function ProductSwiper({ images }) {
+export default function ProductSwiper({ images }) {
   const swiperRef = useRef(null);
   useEffect(() => {
     swiperRef.current.swiper.autoplay.stop();

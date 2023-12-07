@@ -29,7 +29,7 @@
 //     const fetchData = async () => {
 //       try {
 //         const ordersData = await axios.get(
-//           `https://fvshoppay.somee.com/api/Usuarios/Favoritos/Usuario`,
+//           `https://fvecommerce.somee.com/api/Usuarios/Favoritos/Usuario`,
 //           {
 //             headers: {
 //               Authorization: `Bearer ${session?.user.token}`,

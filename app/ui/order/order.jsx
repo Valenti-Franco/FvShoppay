@@ -37,7 +37,7 @@ export default function Order() {
     const fetchData = async () => {
       try {
         const addressNew = await axios.get(
-          `https://fvshoppay.somee.com/api/OrdenCompra/${id.id}`,
+          `https://fvecommerce.somee.com/api/OrdenCompra/${id.id}`,
           {
             headers: {
               Authorization: `Bearer ${session?.user.token}`,
@@ -61,7 +61,7 @@ export default function Order() {
   const DeletePaypalOrden = async () => {
     try {
       const response = await axios.delete(
-        `https://fvshoppay.somee.com/api/OrdenCompra/${id.id}`,
+        `https://fvecommerce.somee.com/api/OrdenCompra/${id.id}`,
         {
           headers: {
             Authorization: `Bearer ${session?.user.token}`,
@@ -77,7 +77,7 @@ export default function Order() {
     // console.log(id.id);
     try {
       const response = await axios.post(
-        `https://fvshoppay.somee.com/Paypal/OrdenCompra/${id.id}`,
+        `https://fvecommerce.somee.com/Paypal/OrdenCompra/${id.id}`,
         {},
         {
           headers: {

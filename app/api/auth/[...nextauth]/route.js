@@ -22,14 +22,14 @@ const handler = NextAuth({
                 // })
                 // console.log("credentials", credentials)
                 const res = await axios.post(
-                    "https://fvshoppay.somee.com/api/Usuarios/authenticate",
+                    "https://fvecommerce.somee.com/api/Usuarios/authenticate",
                     {
                         nombre: credentials.email,
                         password: credentials.password,
                     }
                 );
                 const res2 = await axios(
-                    "https://fvshoppay.somee.com/api/Usuarios/ObtenerUsuario", {
+                    "https://fvecommerce.somee.com/api/Usuarios/ObtenerUsuario", {
                     headers: {
                         Authorization: `Bearer ${res.data}`, // Agrega el token JWT en la cabecera de autorización
                     },

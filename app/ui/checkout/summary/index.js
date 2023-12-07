@@ -58,7 +58,7 @@ export default function Summary({
     try {
 
       const response = await axios.post(
-        `https://fvshoppay.somee.com/api/OrdenCompra/${session.user.id}`, {},
+        `https://fvecommerce.somee.com/api/OrdenCompra/${session.user.id}`, {},
         {
           headers: {
             Authorization: `Bearer ${session?.user.token}`,
@@ -87,7 +87,7 @@ export default function Summary({
     console.log(item)
     try {
       const response = await axios.post(
-        `https://fvshoppay.somee.com/api/DetalleCompra/${idOrden}/${item.id}/${item.qty}`, {},
+        `https://fvecommerce.somee.com/api/DetalleCompra/${idOrden}/${item.id}/${item.qty}`, {},
         {
           headers: {
             Authorization: `Bearer ${session?.user.token}`,

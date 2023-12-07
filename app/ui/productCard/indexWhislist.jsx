@@ -18,7 +18,7 @@ export default function ProductCard() {
   const DeleteFavorito = async (id) => {
     try {
       const ordersData = await axios.delete(
-        `https://fvshoppay.somee.com/api/Usuarios/Favorito/${id}`,
+        `https://fvecommerce.somee.com/api/Usuarios/Favorito/${id}`,
         {
           headers: {
             Authorization: `Bearer ${session?.user.token}`,
@@ -38,7 +38,7 @@ export default function ProductCard() {
   const fetchData = async () => {
     try {
       const ordersData = await axios.get(
-        `https://fvshoppay.somee.com/api/Usuarios/Favoritos/Usuario`,
+        `https://fvecommerce.somee.com/api/Usuarios/Favoritos/Usuario`,
         {
           headers: {
             Authorization: `Bearer ${session?.user.token}`,

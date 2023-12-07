@@ -6,13 +6,17 @@ import styles from "../../../styles/profile.module.scss";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { signOut } from "next-auth/react";
 
 export default function PageAddress() {
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const addressNew = await axios.get(
-          `https://fvshoppay.somee.com/api/Usuarios/Dirreccion/Usuario`,
+          `https://fvecommerce.somee.com/api/Usuarios/Dirreccion/Usuario`,
           {
             headers: {
               Authorization: `Bearer ${session?.user.token}`,
@@ -23,9 +27,12 @@ export default function PageAddress() {
         setAddresses(addressNew.data);
       } catch (error) {
         // Manejar errores
-        console.error("Error al cambiar la dirección activa:", error);
+
+        signOut();
+        router.push("/Signin");
+
         // Puedes lanzar el error nuevamente si es necesario manejarlo en la parte que llama a esta función
-        throw error;
+        // throw error;
       }
     };
 
@@ -33,10 +40,7 @@ export default function PageAddress() {
 
     fetchData();
   }, [session]);
-  const { data: session, status } = useSession();
   const [addresses, setAddresses] = useState();
-
-  const router = useRouter();
 
   if (!session) {
     // Redirect to sign-in page if not authenticated

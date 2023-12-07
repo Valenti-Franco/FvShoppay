@@ -33,9 +33,9 @@ export default function Infos({ product, setActiveImg }) {
     //   setError("Please Select a size");
     //   return;
     // }
-    // console.log(`https://fvshoppay.somee.com/api/Productos${product.id}`)
+    // console.log(`https://fvecommerce.somee.com/api/Productos${product.id}`)
     const { data } = await axios.get(
-      `https://fvshoppay.somee.com/api/Productos/${product.id}`
+      `https://fvecommerce.somee.com/api/Productos/${product.id}`
     );
     if (qty > data.stock) {
       setError(
@@ -84,7 +84,7 @@ export default function Infos({ product, setActiveImg }) {
 
       // Check if the product is already in the wishlist
       const wishlistProducts = await axios.get(
-        "https://fvshoppay.somee.com/api/Usuarios/Favoritos/Usuario",
+        "https://fvecommerce.somee.com/api/Usuarios/Favoritos/Usuario",
         {
           headers: {
             Authorization: `Bearer ${session?.user.token}`,
@@ -103,7 +103,7 @@ export default function Infos({ product, setActiveImg }) {
 
       // Add the product to the wishlist
       const { data } = await axios.post(
-        "https://fvshoppay.somee.com/api/Usuarios/Favorito",
+        "https://fvecommerce.somee.com/api/Usuarios/Favorito",
         {
           productoId: product.id,
         },

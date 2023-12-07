@@ -4,7 +4,7 @@ import styles from "./styles.module.scss";
 
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import Top from "./Top";
 import Ad from "./Ad";
 import { RiSearch2Line } from "react-icons/ri";
@@ -12,16 +12,28 @@ import { FaOpencart } from "react-icons/fa";
 import logo from "../../../public/logo.png";
 
 import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
+  const router = useRouter();
   const { cart } = useSelector((state) => ({ ...state }));
+  const [query, setQuery] = useState(router.query || "");
 
   const { data: session, status } = useSession();
   const country = {
     name: "Argentina",
     flag: "https://static.vecteezy.com/system/resources/previews/011/571/494/original/circle-flag-of-argentina-free-png.png",
   };
-
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (router.pathname !== "/browse") {
+      if (query.length > 1) {
+        router.push(`/browse?search=${query}`);
+      }
+    } else {
+      searchHandler(query);
+    }
+  };
   return (
     <>
       <Ad />
@@ -47,7 +59,7 @@ const Header = () => {
               className={styles.inputSeach}
               type="text"
               placeholder="Search..."
-              // value={query}
+              value={query}
               onChange={(e) => setQuery(e.target.value)}
             />
             <button type="submit" className={styles.search__icon}>

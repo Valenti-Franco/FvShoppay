@@ -7,7 +7,7 @@ import ProductCardItem from "./ProductCardItem";
 import { SwiperSlide } from "swiper/react";
 
 export default async function ProductCard() {
-  const response = await axios.get('https://fvshoppay.somee.com/api/Productos');
+  const response = await axios.get('https://fvecommerce.somee.com/api/Productos?pagina=1&tamanoPagina=10');
   const products = response.data;
 
   // function delay(ms) {

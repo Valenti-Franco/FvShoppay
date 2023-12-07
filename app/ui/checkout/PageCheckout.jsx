@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 const PageCheckout = () => {
   useEffect(() => {
     setAddresses(session?.user?.dirreccion);
-  }, [session]);
+  }, []);
 
   const { data: session, status } = useSession();
   const [addresses, setAddresses] = useState([]);

@@ -97,7 +97,7 @@ export default function Shipping({ user, token, addresses, setAddresses, profile
 
     try {
       const res = await axios.post(
-        `https://fvshoppay.somee.com/api/Usuarios/Dirreccion`,
+        `https://fvecommerce.somee.com/api/Usuarios/Dirreccion`,
         {
           pais: shipping.country,
           nombre: shipping.firstName,
@@ -117,7 +117,7 @@ export default function Shipping({ user, token, addresses, setAddresses, profile
       );
       try {
         const addressNew = await axios.get(
-          `https://fvshoppay.somee.com/api/Usuarios/Dirreccion/Usuario`,
+          `https://fvecommerce.somee.com/api/Usuarios/Dirreccion/Usuario`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -145,7 +145,7 @@ export default function Shipping({ user, token, addresses, setAddresses, profile
 
     try {
       const res = await axios.delete(
-        `https://fvshoppay.somee.com/api/Usuarios/Dirreccion/${id}`,
+        `https://fvecommerce.somee.com/api/Usuarios/Dirreccion/${id}`,
 
         {
           headers: {
@@ -155,7 +155,7 @@ export default function Shipping({ user, token, addresses, setAddresses, profile
       );
       try {
         const addressNew = await axios.get(
-          `https://fvshoppay.somee.com/api/Usuarios/Dirreccion/Usuario`,
+          `https://fvecommerce.somee.com/api/Usuarios/Dirreccion/Usuario`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -184,7 +184,7 @@ export default function Shipping({ user, token, addresses, setAddresses, profile
 
     try {
       const res = await axios.put(
-        `https://fvshoppay.somee.com/api/Usuarios/Dirreccion/${id}`, {
+        `https://fvecommerce.somee.com/api/Usuarios/Dirreccion/${id}`, {
 
       },
 
@@ -196,7 +196,7 @@ export default function Shipping({ user, token, addresses, setAddresses, profile
       );
       try {
         const addressNew = await axios.get(
-          `https://fvshoppay.somee.com/api/Usuarios/Dirreccion/Usuario`,
+          `https://fvecommerce.somee.com/api/Usuarios/Dirreccion/Usuario`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

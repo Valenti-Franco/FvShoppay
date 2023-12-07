@@ -8,7 +8,6 @@ import ProviderBar from "./context/ProviderBar"
 import { Provider } from "react-redux";
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from "redux-persist";
-
 let persistor = persistStore(store);
 
 export default function RootLayout({
@@ -21,6 +20,8 @@ export default function RootLayout({
       <body>
         <SessionContext>
         <Provider store={store}>
+       
+
           <PersistGate loading={null} persistor={persistor}>
 
           <Header/>
@@ -29,6 +30,7 @@ export default function RootLayout({
           {children}
           </ProviderBar>
         </PersistGate>
+      
        
         </Provider>
         </SessionContext>
