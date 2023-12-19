@@ -47,6 +47,10 @@ export default function Browse({ categories, sizes, colors, brands }) {
   const search = valor.get("search");
   const size = valor.getAll("idDetallesTamano");
   const color = valor.getAll("idColores");
+  const brand = valor.getAll("idMarca");
+
+  const totalFilters =
+    (search !== "all" ? 1 : 0) + size.length + color.length + brand.length;
 
   // const sizeHandler = (selectedSize) => {
   //   // Get the existing idDetallesTamano array or create a new one
@@ -76,9 +80,6 @@ export default function Browse({ categories, sizes, colors, brands }) {
   // https://fvecommerce.somee.com/api/Productos/Filtrar?idDetallesTamano=1idColores=2&pagina=1&tamanoPagina=10&nombre=jordan
   // const [subCategories, setsubCategories] = useState([]);
 
-  const handlerClear = () => {
-    router.push("/browse?search=all");
-  };
   const categoryHandler = (category) => {
     console.log(category);
   };
@@ -89,9 +90,11 @@ export default function Browse({ categories, sizes, colors, brands }) {
     const existingSearch = valor.get("search") || "all";
     const existingColors = valor.getAll("idColores") || false;
     const existingSizes = valor.getAll("idDetallesTamano") || false;
+    const existingBrand = valor.getAll("idMarca") || false;
 
     let queryStringColors = "";
     let queryStringSizes = "";
+    let queryStringBrand = "";
 
     if (type === "color") {
       queryStringColors = selectedValues
@@ -101,6 +104,11 @@ export default function Browse({ categories, sizes, colors, brands }) {
       if (existingSizes) {
         queryStringSizes = existingSizes
           .map((size) => `idDetallesTamano=${size}`)
+          .join("&");
+      }
+      if (existingBrand) {
+        queryStringBrand = existingBrand
+          .map((brand) => `idMarca=${brand}`)
           .join("&");
       }
     } else if (type === "size") {
@@ -113,9 +121,31 @@ export default function Browse({ categories, sizes, colors, brands }) {
           .map((color) => `idColores=${color}`)
           .join("&");
       }
+      if (existingBrand) {
+        queryStringBrand = existingBrand
+          .map((brand) => `idMarca=${brand}`)
+          .join("&");
+      }
+    } else if (type === "brand") {
+      // console.log(existingBrand);
+      if (selectedValues) {
+        queryStringBrand = `idMarca=${selectedValues}`;
+      }
+      // console.log(first)
+
+      if (existingColors) {
+        queryStringColors = existingColors
+          .map((color) => `idColores=${color}`)
+          .join("&");
+      }
+      if (existingSizes) {
+        queryStringSizes = existingSizes
+          .map((size) => `idDetallesTamano=${size}`)
+          .join("&");
+      }
     }
 
-    return `/browse?search=${existingSearch}&${queryStringSizes}&${queryStringColors}`;
+    return `/browse?search=${existingSearch}&${queryStringSizes}&${queryStringColors}&${queryStringBrand}`;
   };
 
   // const colorHandler = (selectedColors) => {
@@ -201,29 +231,30 @@ export default function Browse({ categories, sizes, colors, brands }) {
       <div className={styles.browse__container}>
         <div>
           <div className={styles.browse__path}>Home / Browse</div>
-          <div className={styles.browse__tags}>
+          {/* <div className={styles.browse__tags}>
             {categories.map((c) => (
               <Link href="" key={c._id}>
                 {c.nombre}
               </Link>
             ))}
-          </div>
+          </div> */}
         </div>
         <div className={`${styles.browse__store} `}>
           <div
             className={`${styles.browse__store_filters} ${styles.scrollbar}`}
           >
-            <button
+            <Link
               className={styles.browse__clearBtn}
-              onClick={() => handlerClear()}
+              href={"/browse?search=all"}
             >
-              Clear All
-              {/* ({Object.keys(router.query).length}) */}
-            </button>
+              Clear All ({totalFilters})
+            </Link>
             <CategoryFilter
               categories={categories}
               // subCategories={subCategories}
               categoryHandler={categoryHandler}
+              updateQueryString={updateQueryString}
+
               // replaceQuery={replaceQuery}
             />
             <SizesFilter
@@ -241,8 +272,11 @@ export default function Browse({ categories, sizes, colors, brands }) {
               // replaceQuery={replaceQuery}
             />
             <BrandsFilter
+              brand={brand}
               brands={brands}
               brandHandler={brandHandler}
+              updateQueryString={updateQueryString}
+
               // replaceQuery={replaceQuery}
             />
 
@@ -271,7 +305,12 @@ export default function Browse({ categories, sizes, colors, brands }) {
               sortHandler={sortHandler}
             />
             <div className={styles.browse__store_products}>
-              <ProductFilters search={search} size={size} color={color} />
+              <ProductFilters
+                search={search}
+                brand={brand}
+                size={size}
+                color={color}
+              />
             </div>
             <div className={styles.pagination}>
               {/* <Pagination

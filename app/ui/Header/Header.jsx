@@ -12,26 +12,26 @@ import { FaOpencart } from "react-icons/fa";
 import logo from "../../../public/logo.png";
 
 import { useDispatch, useSelector } from "react-redux";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const Header = () => {
   const router = useRouter();
   const { cart } = useSelector((state) => ({ ...state }));
-  const [query, setQuery] = useState(router.query || "");
+  const valor = useSearchParams();
+  const search = valor.get("search");
 
+  const [query, setQuery] = useState(search || "all");
   const { data: session, status } = useSession();
+
   const country = {
     name: "Argentina",
     flag: "https://static.vecteezy.com/system/resources/previews/011/571/494/original/circle-flag-of-argentina-free-png.png",
   };
   const handleSearch = (e) => {
     e.preventDefault();
-    if (router.pathname !== "/browse") {
-      if (query.length > 1) {
-        router.push(`/browse?search=${query}`);
-      }
-    } else {
-      searchHandler(query);
+
+    if (query.length > 1) {
+      router.push(`/browse?search=${query}`);
     }
   };
   return (
@@ -62,9 +62,13 @@ const Header = () => {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
             />
-            <button type="submit" className={styles.search__icon}>
+            <a
+              href={`/browse?search=${query ? query : "all"}`}
+              type="submit"
+              className={styles.search__icon}
+            >
               <RiSearch2Line />
-            </button>
+            </a>
           </form>
           <Link className={styles.cart} href="/cart">
             <FaOpencart />

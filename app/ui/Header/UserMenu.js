@@ -12,7 +12,7 @@ export default function UserMenu({ session }) {
 
     <div className={styles.menu}>
 
-      <h4>Welcome to Shoppay !</h4>
+      <h4>Welcome to FV Shoppay !</h4>
       {session ? (
         <div className={styles.flex}>
           <img src={session.user?.imagen.url} alt="" className={styles.menu__img} />
@@ -39,9 +39,7 @@ export default function UserMenu({ session }) {
         <li>
           <Link href="/profile/orders">My Orders</Link>
         </li>
-        <li>
-          <Link href="/profile/messages">Message Center</Link>
-        </li>
+
         <li>
           <Link href="/profile/address">Address</Link>
         </li>

@@ -1,135 +1,207 @@
-import React, { useEffect, useState } from "react";
-import clsx from "clsx";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Input from "@material-ui/core/Input";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import ListItemText from "@material-ui/core/ListItemText";
-import Select from "@material-ui/core/Select";
-import Checkbox from "@material-ui/core/Checkbox";
-import Chip from "@material-ui/core/Chip";
-import styles from "./styles.module.scss";
-import { useField, Field, ErrorMessage } from "formik";
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-    width: "100%",
-  },
-  chips: {
-    display: "flex",
-    flexWrap: "wrap",
-  },
-  chip: {
-    margin: 2,
-  },
-}));
+"use client"
+// import React, { useEffect, useState } from "react";
+// import clsx from "clsx";
+// import { makeStyles, useTheme } from "@material-ui/core/styles";
+// import Input from "@material-ui/core/Input";
+// import InputLabel from "@material-ui/core/InputLabel";
+// import MenuItem from "@material-ui/core/MenuItem";
+// import FormControl from "@material-ui/core/FormControl";
+// import ListItemText from "@material-ui/core/ListItemText";
+// import Select from "@material-ui/core/Select";
+// import Checkbox from "@material-ui/core/Checkbox";
+// import Chip from "@material-ui/core/Chip";
+// import styles from "./styles.module.scss";
+// import { useField, Field, ErrorMessage } from "formik";
+// const useStyles = makeStyles((theme) => ({
+//   formControl: {
+//     margin: theme.spacing(1),
+//     minWidth: 120,
+//     width: "100%",
+//   },
+//   chips: {
+//     display: "flex",
+//     flexWrap: "wrap",
+//   },
+//   chip: {
+//     margin: 2,
+//   },
+// }));
 
-function getStyles(name, personName, theme) {
-  return {
-    fontWeight:
-      personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-}
+// function getStyles(name, personName, theme) {
+//   return {
+//     fontWeight:
+//       personName.indexOf(name) === -1
+//         ? theme.typography.fontWeightRegular
+//         : theme.typography.fontWeightMedium,
+//   };
+// }
+
+// export default function MultipleSelect({
+//   data,
+//   handleChange,
+//   value,
+//   name,
+//   header,
+//   disabled,
+//   ...rest
+// }) {
+//   const [subs, setSubs] = useState(data || []);
+//   const [field, meta] = useField(rest);
+//   useEffect(() => {
+//     setSubs(data);
+//   }, [data]);
+//   const result = data?.length
+//     ? data.reduce((obj, cur) => ({ ...obj, [cur._id]: cur.name }), {})
+//     : {};
+
+//   const classes = useStyles();
+//   const theme = useTheme();
+//   const [personName, setPersonName] = React.useState([]);
+
+
+
+
+
+//   const handleChangeMultiple = (event) => {
+//     const { options } = event.target;
+//     const value = [];
+//     for (let i = 0, l = options.length; i < l; i += 1) {
+//       if (options[i].selected) {
+//         value.push(options[i].value);
+//       }
+//     }
+//     setPersonName(value);
+//   };
+
+
+//   return (
+//     <div>
+//       <div
+//         className={`${styles.header} ${meta.error[name] ? styles.header__error : ""
+//           }`}
+//       >
+//         <div className={styles.flex}>
+//           {meta.error[name] && <img src="../../../images/warning.png" alt="" />}
+//           {header}
+//         </div>
+//         <span>
+//           {meta.touched && meta.error.subCategories && (
+//             <div className={styles.error__msg}>
+//               <span></span>
+//               <ErrorMessage name={name} />
+//             </div>
+//           )}
+//         </span>
+//       </div>
+//       <FormControl className={classes.formControl}>
+//         {/*
+//         <InputLabel id="demo-mutiple-chip-label">Chip</InputLabel> */}
+//         <Select
+//           labelId="demo-multiple-checkbox-label"
+//           id="demo-multiple-checkbox"
+//           multiple
+//           value={value}
+//           onChange={handleChange}
+//           name={name}
+//           disabled={disabled}
+//           input={<Input id="select-multiple-chip" />}
+//           renderValue={(selected) => (
+//             <div className={classes.chips}>
+//               {selected.map((value) => (
+//                 <Chip
+//                   key={value}
+//                   label={result[value]}
+//                   className={classes.chip}
+//                 />
+//               ))}
+//             </div>
+//           )}
+//         >
+//           {result &&
+//             Object.keys(result).map((id) => {
+//               return (
+//                 <MenuItem key={id} value={id}>
+//                   <Checkbox checked={value.indexOf(id) > -1} />
+//                   <ListItemText primary={result[id]} />
+//                 </MenuItem>
+//               );
+//             })}
+//         </Select>
+//       </FormControl>
+//     </div>
+//   );
+// }
+import { MenuItem, TextField, Chip } from "@mui/material";
+import { ErrorMessage, useField } from "formik";
+import styles from "./styles.module.scss";
 
 export default function MultipleSelect({
   data,
   handleChange,
-  value,
-  name,
+  placeholder,
   header,
   disabled,
   ...rest
 }) {
-  const [subs, setSubs] = useState(data || []);
   const [field, meta] = useField(rest);
-  useEffect(() => {
-    setSubs(data);
-  }, [data]);
-  const result = data.length
-    ? data.reduce((obj, cur) => ({ ...obj, [cur._id]: cur.name }), {})
-    : {};
-
-  const classes = useStyles();
-  const theme = useTheme();
-  const [personName, setPersonName] = React.useState([]);
-  /*
-  const handleChange = (event) => {
-    setPersonName(event.target.value);
-  };
-  */
-
-  /*
-  const handleChangeMultiple = (event) => {
-    const { options } = event.target;
-    const value = [];
-    for (let i = 0, l = options.length; i < l; i += 1) {
-      if (options[i].selected) {
-        value.push(options[i].value);
-      }
-    }
-    setPersonName(value);
-  };
- */
 
   return (
-    <div>
-      <div
-        className={`${styles.header} ${
-          meta.error[name] ? styles.header__error : ""
-        }`}
-      >
-        <div className={styles.flex}>
-          {meta.error[name] && <img src="../../../images/warning.png" alt="" />}
-          {header}
+    <div style={{ marginBottom: "1rem" }}>
+      {header && (
+        <div
+          className={`${styles.header} ${meta.error ? styles.header__error : ""
+            }`}
+        >
+          <div className={styles.flex}>
+            {meta.error && (
+              <img src="../../../images/warning.png" alt="warning" />
+            )}
+            {header}
+          </div>
         </div>
-        <span>
-          {meta.touched && meta.error.subCategories && (
-            <div className={styles.error__msg}>
-              <span></span>
-              <ErrorMessage name={name} />
-            </div>
-          )}
-        </span>
-      </div>
-      <FormControl className={classes.formControl}>
-        {/*
-        <InputLabel id="demo-mutiple-chip-label">Chip</InputLabel> */}
-        <Select
-          labelId="demo-multiple-checkbox-label"
-          id="demo-multiple-checkbox"
-          multiple
-          value={value}
-          onChange={handleChange}
-          name={name}
-          disabled={disabled}
-          input={<Input id="select-multiple-chip" />}
-          renderValue={(selected) => (
-            <div className={classes.chips}>
+      )}
+      <TextField
+        variant="outlined"
+        name={field.name}
+        select
+        label={placeholder}
+        disabled={disabled}
+        value={Array.isArray(field.value) ? field.value : []}
+        onChange={useField}
+        className={`${styles.select} ${meta.touched && meta.error && styles.error__select
+          }`}
+        SelectProps={{
+          multiple: true,
+          renderValue: (selected) => (
+            <div className={styles.selectedValues}>
               {selected.map((value) => (
                 <Chip
-                  key={value}
-                  label={result[value]}
-                  className={classes.chip}
+                  key={value.id}
+                  label={value.color}
+                  style={{ background: value.style, marginRight: 4 }}
                 />
               ))}
             </div>
-          )}
-        >
-          {result &&
-            Object.keys(result).map((id) => {
-              return (
-                <MenuItem key={id} value={id}>
-                  <Checkbox checked={value.indexOf(id) > -1} />
-                  <ListItemText primary={result[id]} />
-                </MenuItem>
-              );
-            })}
-        </Select>
-      </FormControl>
+          ),
+        }}
+      >
+        {data[0]?.map((option) => (
+          <MenuItem key={option.id} value={option}>
+            <div className={styles.colorOption}>
+              <div
+                style={{ background: option.style }}
+                className={`${styles.colorIndicator} rounded-full`}
+              ></div>
+              {option.color}
+            </div>
+          </MenuItem>
+        ))}
+      </TextField>
+      {meta.touched && meta.error && (
+        <p className={styles.error__msg}>
+          <ErrorMessage name={field.name} />
+        </p>
+      )}
     </div>
   );
 }

@@ -6,11 +6,12 @@ import { Suspense } from "react";
 import ProductCardItem from "./ProductCardItem";
 import { SwiperSlide } from "swiper/react";
 
-export default async function ProductFilters({ search, size, color }) {
+export default async function ProductFilters({ search, brand, size, color }) {
   // console.log("search ------------------->", search);
   // console.log(size);
   let sizesQuery = false;
   let colorQuery = false;
+  let brandQuery = false;
 
   if (size.length > 0) {
     sizesQuery = size.map((size) => `idDetallesTamano=${size}`).join("&");
@@ -19,8 +20,13 @@ export default async function ProductFilters({ search, size, color }) {
   if (color.length > 0) {
     colorQuery = color.map((color) => `idColores=${color}`).join("&");
   }
+  if (brand.length > 0) {
+    brandQuery = brand.map((brand) => `idMarca=${brand}`);
+  }
 
-  const queryParams = [sizesQuery, colorQuery].filter(Boolean).join("&");
+  const queryParams = [sizesQuery, colorQuery, brandQuery]
+    .filter(Boolean)
+    .join("&");
 
   const separator = sizesQuery && colorQuery ? "&" : "";
 

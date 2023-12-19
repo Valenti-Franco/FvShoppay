@@ -4,7 +4,7 @@ import { BsPlusLg } from "react-icons/bs";
 import { FaMinus } from "react-icons/fa";
 import styles from "../styles.module.scss";
 import Card from "./Card";
-
+import { MdCategory } from "react-icons/md";
 export default function CategoryFilter({ categories, subCategories, categoryHandler, replaceQuery }) {
 
 
@@ -13,7 +13,7 @@ export default function CategoryFilter({ categories, subCategories, categoryHand
   return (
     <div className={styles.filter}>
       <h3>
-        Category <span onClick={() => setShow(!show)}>{show ? <FaMinus /> : <BsPlusLg />}</span>
+        <b className="flex gap-2">Category <MdCategory /> </b>  <span onClick={() => setShow(!show)}>{show ? <FaMinus /> : <BsPlusLg />}</span>
       </h3>
       {show ?
         categories.map((category, i) => (

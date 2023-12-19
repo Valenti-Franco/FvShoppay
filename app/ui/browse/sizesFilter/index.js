@@ -7,7 +7,7 @@ import styles from "../styles.module.scss";
 import Size from "./Size";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-
+import { GiResize } from "react-icons/gi";
 export default function SizesFilter({ sizes, sizeid, sizeHandler, updateQueryString }) {
   const router = useRouter();
 
@@ -39,7 +39,7 @@ export default function SizesFilter({ sizes, sizeid, sizeHandler, updateQueryStr
   return (
     <div className={styles.filter}>
       <h3>
-        Sizes <span onClick={() => setShow(!show)}>{show ? <FaMinus /> : <BsPlusLg />}</span>
+        <b className="flex gap-2 ">Sizes <GiResize /> </b>  <span onClick={() => setShow(!show)}>{show ? <FaMinus /> : <BsPlusLg />}</span>
       </h3>
       {show && (
         <div className={styles.filter__sizes}>

@@ -4,7 +4,7 @@ import { BsPlusLg } from "react-icons/bs";
 import { FaMinus } from "react-icons/fa";
 import styles from "../styles.module.scss";
 import Link from "next/link";
-
+import { MdInvertColors } from "react-icons/md";
 export default function ColorsFilter({ colors, colorid, colorHandler, replaceQuery, updateQueryString }) {
   const [show, setShow] = useState(true);
   const [selectedColors, setSelectedColors] = useState([]);
@@ -40,7 +40,7 @@ export default function ColorsFilter({ colors, colorid, colorHandler, replaceQue
   return (
     <div className={styles.filter}>
       <h3>
-        Colors <span>{show ? <FaMinus /> : <BsPlusLg />}</span>
+        <b className="flex gap-2">  Colors <MdInvertColors /></b>  <span onClick={() => setShow(!show)}>{show ? <FaMinus /> : <BsPlusLg />}</span>
       </h3>
       {show && (
         <div className={styles.filter__colors}>
@@ -56,11 +56,10 @@ export default function ColorsFilter({ colors, colorid, colorHandler, replaceQue
             );
           })}
 
+          <a href={updateQueryString(selectedColors, "color")}>Apply Colors</a>
         </div>
 
       )}
-      <a href={updateQueryString(selectedColors, "color")}>Apply Colors</a>
-      <Link href={updateQueryString(selectedColors, "color")}>Apply Colors</Link>
 
 
 
