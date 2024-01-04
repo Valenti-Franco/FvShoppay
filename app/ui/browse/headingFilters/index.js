@@ -10,15 +10,37 @@ import { useRouter } from "next/navigation";
 // import { useRouter } from "next/router";
 
 export default function HeadingFilters({
-  priceHandler,
-  multiPriceHandler,
-  shippingHandler,
-  replaceQuery,
-  ratingHandler,
-  sortHandler,
+  updateQueryString,
+  minPrice,
+  maxPrice
+  // shippingHandler,
+  // replaceQuery,
+  // ratingHandler,
+  // sortHandler,
 }) {
   const router = useRouter();
   const [show, setShow] = useState(false);
+
+
+  const [selectedPrice, setSelectedPrice] = useState(minPrice.length ? parseInt(minPrice) : 0);
+  const [selectedPriceMax, setSelectedPriceMax] = useState(maxPrice.length ? parseInt(maxPrice) : 1000);
+
+  const [ishovermin, setishovermin] = useState(false)
+  const [ishovermax, setishovermax] = useState(false)
+
+  const onChangeMin = (e) => {
+
+    setSelectedPrice(e.target.value)
+    setishovermin(true)
+
+  }
+  const onChangeMax = (e) => {
+
+    setSelectedPriceMax(e.target.value, "max")
+    setishovermax(true)
+
+  }
+
   // const check = replaceQuery(
   //   "shipping",
   //   router.query?.shipping == "0" ? false : "0"
@@ -29,75 +51,111 @@ export default function HeadingFilters({
   return (
     <div className={styles.filters}>
       <div className={styles.filters__price}>
-        <span>Price :</span>
-        <input
-          type="number"
-          placeholder="min"
-          min="0"
-          value={router.query?.price?.split("_")[0] || ""}
-          onChange={(e) => priceHandler(e.target.value, "min")}
-        />
-        <input
-          type="number"
-          placeholder="max"
-          min="0"
-          value={router.query?.price?.split("_")[1] || ""}
-          onChange={(e) => priceHandler(e.target.value, "max")}
-        />
+        <div className="flex gap-4 items-center">
+          <span>Price :</span>
+          <div className=" flex relative flex-col">
+            <input
+              type="number"
+              placeholder={selectedPrice}
+              min={0}
+              value={selectedPrice}
+              onChange={(e) => onChangeMin(e)}
+            />
+
+          </div>
+
+          <div className=" flex relative flex-col">
+
+            <input
+              type="number"
+              placeholder={selectedPriceMax}
+              min={selectedPrice}
+              value={selectedPriceMax}
+              onChange={(e) => onChangeMax(e)}
+            />
+
+
+          </div>
+        </div>
+
+        {selectedPriceMax < selectedPrice ? (
+          null
+        ) : (
+          (ishovermin || ishovermax) && (
+
+            <a className="  flex w-full justify-center items-center text-xs bg-gray-200 font-extrabold  hover:bg-gray-400  p-1 rounded-md border-solid border-2 border-sky-500 " href={updateQueryString([selectedPrice, selectedPriceMax], "price")}>Apply </a>
+
+          )
+        )}
       </div>
       <div className={styles.filers__priceBtns}>
         <Tooltip
           title={<h2>Check out products under 10$</h2>}
           placement="top"
           arrow
-          onClick={() => multiPriceHandler(0, 10)}
+        // onClick={() => multiPriceHandler(0, 10)}
         >
           <button className={styles.tooltip_btn}>
-            <span style={{ height: "10%" }}></span>
+            <a href={updateQueryString([0, 10], "price")} >
+              <span style={{ height: "10%" }}></span>
+            </a>
           </button>
+
         </Tooltip>
         <Tooltip
           title={<h2>Check out products between 10$ and 50$</h2>}
           placement="top"
           arrow
-          onClick={() => multiPriceHandler(10, 50)}
         >
           <button className={styles.tooltip_btn}>
-            <span style={{ height: "25%" }}></span>
+            <a href={updateQueryString([10, 50], "price")} >
+
+              <span style={{ height: "25%" }}></span>
+            </a>
+
           </button>
         </Tooltip>
         <Tooltip
           title={<h2>Check out products between 50$ and 100$</h2>}
           placement="top"
           arrow
-          onClick={() => multiPriceHandler(50, 100)}
         >
           <button className={styles.tooltip_btn}>
-            <span style={{ height: "50%" }}></span>
+            <a href={updateQueryString([50, 100], "price")} >
+
+              <span style={{ height: "50%" }}></span>
+            </a>
+
           </button>
         </Tooltip>
         <Tooltip
           title={<h2>Check out products between 100$ and 500$</h2>}
           placement="top"
           arrow
-          onClick={() => multiPriceHandler(100, 500)}
         >
           <button className={styles.tooltip_btn}>
-            <span style={{ height: "75%" }}></span>
+            <a href={updateQueryString([100, 500], "price")} >
+
+              <span style={{ height: "75%" }}></span>
+            </a>
+
           </button>
         </Tooltip>
         <Tooltip
           title={<h2>Check out products for more than 500$</h2>}
           placement="top"
           arrow
-          onClick={() => multiPriceHandler(500, "")}
         >
           <button className={styles.tooltip_btn}>
-            <span style={{ height: "100%" }}></span>
+            <a href={updateQueryString([500, 9999], "price")} >
+
+
+              <span style={{ height: "100%" }}></span>
+            </a>
           </button>
         </Tooltip>
       </div>
-      <div
+      {/* <div
         className={styles.filters__shipping}
       // onClick={() => shippingHandler(check.result)}
       >
@@ -110,8 +168,8 @@ export default function HeadingFilters({
 
         />
         <label htmlFor="shipping">Free Shipping</label>
-      </div>
-      <div
+      </div> */}
+      {/* <div
         className={styles.filters__rating}
         onClick={() => ratingHandler(checkRating.result)}
       >
@@ -130,8 +188,8 @@ export default function HeadingFilters({
           <AiTwotoneStar />
           <AiTwotoneStar /> & up
         </label>
-      </div>
-      <div className={styles.filters__sort}>
+      </div> */}
+      {/* <div className={styles.filters__sort}>
         <span>Sort by</span>
         <div
           className={styles.filters__sort_list}
@@ -174,7 +232,7 @@ export default function HeadingFilters({
             ))}
           </ul>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

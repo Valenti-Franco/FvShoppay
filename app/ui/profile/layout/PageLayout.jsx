@@ -5,23 +5,23 @@ import Head from "next/head";
 import Sidebar from "../sidebar";
 import { useSession } from "next-auth/react";
 
-export default function Layout({ children }) {
-  const { data: session, status } = useSession();
+export default function Layout({ user, address, children }) {
+  // const { data: session, status } = useSession();
 
   return (
     <div className={styles.layout}>
       <Head>
-        <title>{session?.user?.name}</title>
+        <title>{user?.nombre}</title>
       </Head>
       {/* <Header /> */}
       <div className={styles.layout__container}>
-        {status === "authenticated" ? (
-          <Sidebar
-            data={{
-              ...session.user,
-            }}
-          />
-        ) : null}
+        <Sidebar
+          data={{
+            ...user,
+          }}
+          address={address}
+        />
+
         <div className={styles.layout__content}>{children}</div>
       </div>
     </div>

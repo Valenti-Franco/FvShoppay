@@ -121,7 +121,7 @@ export default function Infos({ product, setActiveImg }) {
       console.log(error)
     }
   };
-  console.log(product.sumaDePuntos)
+  // console.log(product)
   return (
     <div className={styles.infos}>
       {/* <DialogModal /> */}
@@ -162,11 +162,12 @@ export default function Infos({ product, setActiveImg }) {
             : product.sizes.reduce((start, next) => start + next.qty, 0)}{" "}
           pieces available.
         </span> */}
-        {/* <div className={styles.infos__sizes}>
+        <div className={styles.infos__sizes}>
           <h4>Select a Size : </h4>
           <div className={styles.infos__sizes_wrap}>
-            {product.sizes.map((size, i) => (
+            {/* {product.tamanos.map((size, i) => (
               <Link
+                key={i}
                 href={`/product/${product.slug}?style=${router.query.style}&size=${i}`}
               >
                 <div
@@ -177,9 +178,9 @@ export default function Infos({ product, setActiveImg }) {
                   {size.size}
                 </div>
               </Link>
-            ))}
+            ))} */}
           </div>
-        </div> */}
+        </div>
         {/* <div className={styles.infos__colors}>
           {product.colors &&
             product.colors.map((color, i) => (

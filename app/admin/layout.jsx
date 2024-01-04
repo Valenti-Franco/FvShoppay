@@ -82,7 +82,7 @@ const layout = async ({ children }) => {
       }
     );
 
-    console.log(user.data.role);
+    // console.log(user.data.role);
     if (user.data.role !== "Admin") {
       redirect("/");
     }

@@ -1,10 +1,13 @@
+
 .filters {
   position: relative;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 2rem;
+  text-decoration: none;
   margin-bottom: 2rem;
+
   input[type="checkbox"] {
     width: 17px;
     height: 17px;
@@ -23,6 +26,7 @@
       font-size: 14px;
     }
     &_list {
+      text-decoration: none;
       position: relative;
       display: flex;
       align-items: center;
@@ -86,6 +90,8 @@
   }
   &__price {
     display: flex;
+    gap: 10px;
+    flex-direction: column;
     align-items: center;
     gap: 5px;
     span {
@@ -119,6 +125,10 @@
       }
     }
   }
+}
+
+.filter:hover{
+  background: #a8a8a862;
 }
 .tooltip_btn {
   position: relative;

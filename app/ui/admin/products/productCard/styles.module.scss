@@ -46,3 +46,124 @@
     }
   }
 }
+
+
+
+
+.main {
+  color: rgb(0, 0, 0);
+  background-color: rgb(241, 241, 241);
+  height: auto;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+}
+.Container{
+  width: 100%;
+}
+.mainDark{
+  background-color: rgb(136, 136, 136);
+  color: #fff !important;
+}
+.title{
+  text-align: center;
+ 
+}
+.AdminContainer {
+  display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    width: 80%;
+    contain: content;
+    background-color: rgb(229, 229, 230);
+}
+.AdminContainerDark {
+
+  -webkit-text-stroke: 1px white;
+    background-color: rgb(58, 58, 58) !important;
+}
+
+.btnDelete{
+
+    display: flex;
+    align-self: center;
+    padding: 5px 5px;
+ 
+    background-color: rgb(165, 47, 47);
+    color: rgb(255, 255, 255);
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btnEdit{
+  cursor: pointer;
+  display: flex;
+  align-self: center;
+  padding: 5px 5px;
+
+  background-color: rgb(47, 165, 143);
+  color: rgb(255, 255, 255);
+  text-align: center;
+  border-radius: 5px;
+}
+
+
+.acciones{
+  display: flex;
+  gap: 15px;
+  font-size: 25px;
+}
+
+
+.modal {
+  position: absolute;
+  width: 400px;
+  background-color: #fff; /* Cambia esto a tu preferencia */
+  border: 2px solid #000;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  padding: 16px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Estilos para los iconos */
+.iconos {
+  cursor: pointer;
+}
+
+/* Estilos para los campos de entrada de material UI */
+.inputMaterial {
+  width: 100%;
+}
+
+.btnImg{
+  cursor: pointer;
+  font-size: 14px;
+  
+}
+
+
+.swiperSlide{
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+} 
+
+
+
+
+@media  screen and (max-width: 768px){ 
+  .AdminContainer{
+    width: 100%;
+  
+  }
+  
+}

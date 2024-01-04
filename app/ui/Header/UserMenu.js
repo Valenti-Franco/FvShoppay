@@ -15,7 +15,7 @@ export default function UserMenu({ session }) {
       <h4>Welcome to FV Shoppay !</h4>
       {session ? (
         <div className={styles.flex}>
-          <img src={session.user?.imagen.url} alt="" className={styles.menu__img} />
+          <img src={session.user?.imagen?.url ? session.user.imagen.url : "https://res.cloudinary.com/deh35rofi/image/upload/v1698237266/blank-profile-picture-973460_1280_rvjszn.jpg"} alt="" className={styles.menu__img} />
           <div className={styles.col}>
             <span>Welcome Back,</span>
             <h3>{session?.user?.nombre}</h3>

@@ -283,7 +283,7 @@ export default function Shipping({ user, token, addresses, setAddresses, profile
               onClick={() => changeActiveHandler(address.id)}
             >
               <div className={styles.address__side}>
-                <img src={user?.imagen.url} alt="" />
+                <img src={user?.imagen?.url ? user?.imagen.url : "https://res.cloudinary.com/deh35rofi/image/upload/v1698237266/blank-profile-picture-973460_1280_rvjszn.jpg"} alt="" />
               </div>
               <div className={styles.address__col}>
                 <span>

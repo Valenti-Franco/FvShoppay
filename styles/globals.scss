@@ -2,13 +2,15 @@
 
 
 *{
-  margin: 0;
+  margin: 10;
   text-decoration: none;
   padding: 0;
 }
 body{
+  contain: content;
   font-family: sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   
 }
+

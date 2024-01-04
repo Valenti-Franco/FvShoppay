@@ -28,7 +28,7 @@ export default function PageOrders() {
         );
         // Si la solicitud fue exitosa, actualiza las direcciones en el estado
         setOrders(ordersData.data);
-        console.log(ordersData.data);
+        // console.log(ordersData.data);
       } catch (error) {
         // Manejar errores
         console.error("Error al cambiar la dirección activa:", error);
@@ -52,9 +52,11 @@ export default function PageOrders() {
 
   return (
     <>
-      <Head>
-        <title>Orders</title>
-      </Head>
+      <head>
+        <title>Profile / Orders</title>
+        <meta property="og:title" content="My page title" key="title" />
+        <link rel="icon" href="/favicon.ico" />
+      </head>
       <div className={styles.orders}>
         <div className={styles.header}>
           <h1>MY ORDERS</h1>

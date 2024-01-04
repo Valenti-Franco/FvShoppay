@@ -11,7 +11,7 @@ export default function ListItem({
   subCategory,
   setSubCategories,
 }) {
-  console.log("sub", subCategory);
+
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [parent, setParent] = useState("");
@@ -46,7 +46,7 @@ export default function ListItem({
       <input
         className={open ? styles.open : ""}
         type="text"
-        value={name ? name : subCategory.name}
+        value={name ? name : subCategory.nombre}
         onChange={(e) => setName(e.target.value)}
         disabled={!open}
         ref={input}
@@ -54,21 +54,22 @@ export default function ListItem({
       {open && (
         <div className={styles.list__item_expand}>
           <select
+
             name="parent"
-            value={parent || subCategory.parent._id}
+            value={parent || subCategory.id}
             onChange={(e) => setParent(e.target.value)}
             disabled={!open}
             className={styles.select}
           >
             {categories.map((c) => (
-              <option value={c._id} key={c._id}>
-                {c.name}
+              <option value={c.id} key={c.id}>
+                {c.nombre}
               </option>
             ))}
           </select>
           <button
             className={styles.btn}
-            onClick={() => handleUpdate(subCategory._id)}
+            onClick={() => handleUpdate(subCategory.id)}
           >
             Save
           </button>
@@ -93,7 +94,7 @@ export default function ListItem({
             }}
           />
         )}
-        <AiFillDelete onClick={() => handleRemove(subCategory._id)} />
+        <AiFillDelete onClick={() => handleRemove(subCategory.id)} />
       </div>
     </li>
   );

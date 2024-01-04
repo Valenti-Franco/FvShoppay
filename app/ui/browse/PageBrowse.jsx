@@ -39,50 +39,35 @@ import {
   useSearchParams,
   redirect,
 } from "next/navigation";
+import { useState } from "react";
+import Head from "next/head";
+
 export default function Browse({ categories, sizes, colors, brands }) {
+  // console.log(categories);
   const router = useRouter();
   const { push } = useRouter();
   const valor = useSearchParams();
-  // console.log(valor.getAll("idDetallesTamano"));
+
   const search = valor.get("search");
   const size = valor.getAll("idDetallesTamano");
   const color = valor.getAll("idColores");
   const brand = valor.getAll("idMarca");
+  const minPrice = valor.getAll("minPrice");
+  const maxPrice = valor.getAll("maxPrice");
+  const SubCategory = valor.getAll("idSubCategory");
 
   const totalFilters =
-    (search !== "all" ? 1 : 0) + size.length + color.length + brand.length;
-
-  // const sizeHandler = (selectedSize) => {
-  //   // Get the existing idDetallesTamano array or create a new one
-
-  //   const existingSearch = valor.get("search") || "all";
-  //   const existingColors = valor.getAll("idColores") || false;
-
-  //   let queryStringColors = "";
-  //   let queryStringSize = "";
-
-  //   queryStringSize = selectedSize
-  //     .map((size) => `idDetallesTamano=${size}`)
-  //     .join("&");
-
-  //   if (existingColors) {
-  //     queryStringColors = existingColors
-  //       .map((color) => `idColores=${color}`)
-  //       .join("&");
-  //   }
-
-  //   push(
-  //     `/browse?search=${existingSearch}&${queryStringSize}&${
-  //       existingColors ? queryStringColors : null
-  //     }`
-  //   );
-  // };
-  // https://fvecommerce.somee.com/api/Productos/Filtrar?idDetallesTamano=1idColores=2&pagina=1&tamanoPagina=10&nombre=jordan
-  // const [subCategories, setsubCategories] = useState([]);
+    (search !== "all" ? 1 : 0) +
+    size.length +
+    color.length +
+    brand.length +
+    minPrice.length +
+    maxPrice.length;
 
   const categoryHandler = (category) => {
     console.log(category);
   };
+
   const brandHandler = (brand) => {
     console.log(brands);
   };
@@ -91,15 +76,58 @@ export default function Browse({ categories, sizes, colors, brands }) {
     const existingColors = valor.getAll("idColores") || false;
     const existingSizes = valor.getAll("idDetallesTamano") || false;
     const existingBrand = valor.getAll("idMarca") || false;
+    const existingMinPrice = valor.getAll("minPrice") || false;
+    const existingMaxPrice = valor.getAll("maxPrice") || false;
+    const existingSubcategory = valor.getAll("idSubCategory") || false;
 
     let queryStringColors = "";
     let queryStringSizes = "";
     let queryStringBrand = "";
+    let queryStringMinPrice = "";
+    let queryStringMaxPrice = "";
+    let queryStringSubcategory = "";
 
+    if (type === "subcategory") {
+      queryStringSubcategory = selectedValues
+        .map((subcategory) => `idSubCategory=${subcategory}`)
+        .join("&");
+
+      if (existingColors) {
+        queryStringColors = existingColors
+          .map((color) => `idColores=${color}`)
+          .join("&");
+      }
+      if (existingSizes) {
+        queryStringSizes = existingSizes
+          .map((size) => `idDetallesTamano=${size}`)
+          .join("&");
+      }
+      if (existingBrand) {
+        queryStringBrand = existingBrand
+          .map((brand) => `idMarca=${brand}`)
+          .join("&");
+      }
+      if (existingMinPrice) {
+        queryStringMinPrice = existingMinPrice
+          .map((minPrice) => `minPrice=${minPrice}`)
+          .join("&");
+      }
+      if (existingMaxPrice) {
+        queryStringMaxPrice = existingMaxPrice
+          .map((maxPrice) => `maxPrice=${maxPrice}`)
+          .join("&");
+      }
+    }
     if (type === "color") {
       queryStringColors = selectedValues
         .map((color) => `idColores=${color}`)
         .join("&");
+
+      if (existingSubcategory) {
+        queryStringSubcategory = existingSubcategory
+          .map((subcategory) => `idSubCategory=${subcategory}`)
+          .join("&");
+      }
 
       if (existingSizes) {
         queryStringSizes = existingSizes
@@ -109,6 +137,16 @@ export default function Browse({ categories, sizes, colors, brands }) {
       if (existingBrand) {
         queryStringBrand = existingBrand
           .map((brand) => `idMarca=${brand}`)
+          .join("&");
+      }
+      if (existingMinPrice) {
+        queryStringMinPrice = existingMinPrice
+          .map((minPrice) => `minPrice=${minPrice}`)
+          .join("&");
+      }
+      if (existingMaxPrice) {
+        queryStringMaxPrice = existingMaxPrice
+          .map((maxPrice) => `maxPrice=${maxPrice}`)
           .join("&");
       }
     } else if (type === "size") {
@@ -121,9 +159,24 @@ export default function Browse({ categories, sizes, colors, brands }) {
           .map((color) => `idColores=${color}`)
           .join("&");
       }
+      if (existingSubcategory) {
+        queryStringSubcategory = existingSubcategory
+          .map((subcategory) => `idSubCategory=${subcategory}`)
+          .join("&");
+      }
       if (existingBrand) {
         queryStringBrand = existingBrand
           .map((brand) => `idMarca=${brand}`)
+          .join("&");
+      }
+      if (existingMinPrice) {
+        queryStringMinPrice = existingMinPrice
+          .map((minPrice) => `minPrice=${minPrice}`)
+          .join("&");
+      }
+      if (existingMaxPrice) {
+        queryStringMaxPrice = existingMaxPrice
+          .map((maxPrice) => `maxPrice=${maxPrice}`)
           .join("&");
       }
     } else if (type === "brand") {
@@ -133,6 +186,11 @@ export default function Browse({ categories, sizes, colors, brands }) {
       }
       // console.log(first)
 
+      if (existingSubcategory) {
+        queryStringSubcategory = existingSubcategory
+          .map((subcategory) => `idSubCategory=${subcategory}`)
+          .join("&");
+      }
       if (existingColors) {
         queryStringColors = existingColors
           .map((color) => `idColores=${color}`)
@@ -143,9 +201,99 @@ export default function Browse({ categories, sizes, colors, brands }) {
           .map((size) => `idDetallesTamano=${size}`)
           .join("&");
       }
+      if (existingMinPrice) {
+        queryStringMinPrice = existingMinPrice
+          .map((minPrice) => `minPrice=${minPrice}`)
+          .join("&");
+      }
+      if (existingMaxPrice) {
+        queryStringMinPrice = existingMinPrice
+          .map((minPrice) => `minPrice=${minPrice}`)
+          .join("&");
+      }
+    } else if (type === "minPrice") {
+      queryStringMinPrice = `minPrice=${selectedValues}`;
+
+      if (existingColors) {
+        queryStringColors = existingColors
+          .map((color) => `idColores=${color}`)
+          .join("&");
+      }
+      if (existingSubcategory) {
+        queryStringSubcategory = existingSubcategory
+          .map((subcategory) => `idSubCategory=${subcategory}`)
+          .join("&");
+      }
+      if (existingSizes) {
+        queryStringSizes = existingSizes
+          .map((size) => `idDetallesTamano=${size}`)
+          .join("&");
+      }
+      if (existingBrand) {
+        queryStringBrand = existingBrand
+          .map((brand) => `idMarca=${brand}`)
+          .join("&");
+      }
+      if (existingMaxPrice) {
+        queryStringMaxPrice = existingMaxPrice
+          .map((maxPrice) => `maxPrice=${maxPrice}`)
+          .join("&");
+      }
+    } else if (type === "maxPrice") {
+      queryStringMaxPrice = `maxPrice=${selectedValues}`;
+
+      if (existingColors) {
+        queryStringColors = existingColors
+          .map((color) => `idColores=${color}`)
+          .join("&");
+      }
+      if (existingSubcategory) {
+        queryStringSubcategory = existingSubcategory
+          .map((subcategory) => `idSubCategory=${subcategory}`)
+          .join("&");
+      }
+      if (existingSizes) {
+        queryStringSizes = existingSizes
+          .map((size) => `idDetallesTamano=${size}`)
+          .join("&");
+      }
+      if (existingBrand) {
+        queryStringBrand = existingBrand
+          .map((brand) => `idMarca=${brand}`)
+          .join("&");
+      }
+      if (existingMinPrice) {
+        queryStringMinPrice = existingMinPrice
+          .map((minPrice) => `minPrice=${minPrice}`)
+          .join("&");
+      }
+    } else if (type === "price") {
+      queryStringMinPrice = `minPrice=${selectedValues[0]}`;
+      queryStringMaxPrice = `maxPrice=${selectedValues[1]}`;
+
+      if (existingColors) {
+        queryStringColors = existingColors
+          .map((color) => `idColores=${color}`)
+          .join("&");
+      }
+      if (existingSubcategory) {
+        queryStringSubcategory = existingSubcategory
+          .map((subcategory) => `idSubCategory=${subcategory}`)
+          .join("&");
+      }
+      if (existingSizes) {
+        queryStringSizes = existingSizes
+          .map((size) => `idDetallesTamano=${size}`)
+          .join("&");
+      }
+      if (existingBrand) {
+        queryStringBrand = existingBrand
+          .map((brand) => `idMarca=${brand}`)
+          .join("&");
+      }
     }
 
-    return `/browse?search=${existingSearch}&${queryStringSizes}&${queryStringColors}&${queryStringBrand}`;
+    return `/browse?search=${existingSearch}&${queryStringSizes}&${queryStringColors}&${queryStringSubcategory}&${queryStringBrand}&${queryStringMinPrice}&${queryStringMaxPrice}`;
   };
 
   // const colorHandler = (selectedColors) => {
@@ -185,20 +333,17 @@ export default function Browse({ categories, sizes, colors, brands }) {
       filter({ gender });
     }
   };
-  const priceHandler = (price, type) => {
-    // console.log("price --->", price);
-    let priceQuery = router.query?.price?.split("_") || "";
-    let min = priceQuery[0] || "";
-    let max = priceQuery[1] || "";
-    let newPrice = "";
-    if (type == "min") {
-      newPrice = `${price}_${max}`;
-    } else {
-      newPrice = `${min}_${price}`;
-    }
-    console.log("newPrice ---->", newPrice);
-    filter({ price: newPrice });
-  };
+  // const priceHandler = (price, type) => {
+  //   // console.log("price --->", price);
+  //   // let priceQuery = router.query?.price?.split("_") || "";
+  //   // if (type == "min") {
+  //   //   console.log("newPrice ---->", price);
+  //   //   setminprice(price);
+  //   // } else {
+  //   //   console.log("maxPrice ---->", price);
+  //   //   setmaxprice(price);
+  //   // }
+  // };
   const multiPriceHandler = (min, max) => {
     filter({ price: `${min}_${max}` });
   };
@@ -228,29 +373,37 @@ export default function Browse({ categories, sizes, colors, brands }) {
 
   return (
     <div className={styles.browse}>
+      <head>
+        <title>Home / Browse</title>
+        <meta property="og:title" content="My page title" key="title" />
+        <link rel="icon" href="/favicon.ico" />
+      </head>
       <div className={styles.browse__container}>
         <div>
           <div className={styles.browse__path}>Home / Browse</div>
-          {/* <div className={styles.browse__tags}>
-            {categories.map((c) => (
-              <Link href="" key={c._id}>
-                {c.nombre}
-              </Link>
-            ))}
-          </div> */}
+          <div className={styles.browse__tags}>
+            {categories.map((c) =>
+              c.subCategory.map((sub) => (
+                <a
+                  href={`/browse?search=all&idSubCategory=${sub.id}`}
+                  key={sub.id}
+                >
+                  {sub.nombre}
+                </a>
+              ))
+            )}
+          </div>
         </div>
         <div className={`${styles.browse__store} `}>
           <div
             className={`${styles.browse__store_filters} ${styles.scrollbar}`}
           >
-            <Link
-              className={styles.browse__clearBtn}
-              href={"/browse?search=all"}
-            >
+            <a className={styles.browse__clearBtn} href={"/browse?search=all"}>
               Clear All ({totalFilters})
-            </Link>
+            </a>
             <CategoryFilter
               categories={categories}
+              SubCategory={SubCategory}
               // subCategories={subCategories}
               categoryHandler={categoryHandler}
               updateQueryString={updateQueryString}
@@ -297,12 +450,15 @@ export default function Browse({ categories, sizes, colors, brands }) {
           </div>
           <div className={styles.browse__store_products_wrap}>
             <HeadingFilters
-              priceHandler={priceHandler}
-              multiPriceHandler={multiPriceHandler}
-              shippingHandler={shippingHandler}
-              ratingHandler={ratingHandler}
+              updateQueryString={updateQueryString}
+              minPrice={minPrice}
+              maxPrice={maxPrice}
+              // priceHandler={priceHandler}
+              // multiPriceHandler={multiPriceHandler}
+              // shippingHandler={shippingHandler}
+              // ratingHandler={ratingHandler}
               // replaceQuery={replaceQuery}
-              sortHandler={sortHandler}
+              // sortHandler={sortHandler}
             />
             <div className={styles.browse__store_products}>
               <ProductFilters
@@ -310,6 +466,9 @@ export default function Browse({ categories, sizes, colors, brands }) {
                 brand={brand}
                 size={size}
                 color={color}
+                minPrice={minPrice}
+                maxPrice={maxPrice}
+                SubCategory={SubCategory}
               />
             </div>
             <div className={styles.pagination}>

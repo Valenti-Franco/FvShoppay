@@ -1,3 +1,4 @@
+"use client"
 import axios from "axios";
 import { useRef } from "react";
 import { useState } from "react";
@@ -37,7 +38,7 @@ export default function ListItem({ category, setCategories }) {
       <input
         className={open ? styles.open : ""}
         type="text"
-        value={name ? name : category.name}
+        value={name ? name : category.nombre}
         onChange={(e) => setName(e.target.value)}
         disabled={!open}
         ref={input}
@@ -46,7 +47,7 @@ export default function ListItem({ category, setCategories }) {
         <div className={styles.list__item_expand}>
           <button
             className={styles.btn}
-            onClick={() => handleUpdate(category._id)}
+            onClick={() => handleUpdate(category.id)}
           >
             Save
           </button>
@@ -70,7 +71,7 @@ export default function ListItem({ category, setCategories }) {
             }}
           />
         )}
-        <AiFillDelete onClick={() => handleRemove(category._id)} />
+        <AiFillDelete onClick={() => handleRemove(category.id)} />
       </div>
     </li>
   );

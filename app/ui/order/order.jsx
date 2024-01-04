@@ -31,7 +31,7 @@ export default function Order() {
   const [orderData, setOrderData] = useState("");
   const id = useParams();
   const Router = useRouter();
-  //   console.log(session);
+  console.log(session);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -244,7 +244,16 @@ export default function Order() {
               <h1>Customer´s Order</h1>
               <div className={styles.order__address_user}>
                 <div className={styles.order__address_user_infos}>
-                  <img src={session.user.imagen.url} alt="" />
+                  <img
+                    src={
+                      session?.user?.imagen?.url
+                        ? session.user.imagen.url
+                        : "https://res.cloudinary.com/deh35rofi/image/upload/v1698237266/blank-profile-picture-973460_1280_rvjszn.jpg"
+                    }
+                    alt=""
+                    className={styles.menu__img}
+                  />
+
                   <div>
                     <span>{session.user.nombre}</span>
                     <span>{session.user.email}</span>

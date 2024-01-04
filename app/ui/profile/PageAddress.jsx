@@ -12,34 +12,34 @@ export default function PageAddress() {
   const { data: session, status } = useSession();
   const router = useRouter();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const addressNew = await axios.get(
-          `https://fvecommerce.somee.com/api/Usuarios/Dirreccion/Usuario`,
-          {
-            headers: {
-              Authorization: `Bearer ${session?.user.token}`,
-            },
-          }
-        );
-        // Si la solicitud fue exitosa, actualiza las direcciones en el estado
-        setAddresses(addressNew.data);
-      } catch (error) {
-        // Manejar errores
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const addressNew = await axios.get(
+  //         `https://fvecommerce.somee.com/api/Usuarios/Dirreccion/Usuario`,
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${session?.user.token}`,
+  //           },
+  //         }
+  //       );
+  //       // Si la solicitud fue exitosa, actualiza las direcciones en el estado
+  //       setAddresses(addressNew.data);
+  //     } catch (error) {
+  //       // Manejar errores
 
-        signOut();
-        router.push("/Signin");
+  //       signOut();
+  //       router.push("/Signin");
 
-        // Puedes lanzar el error nuevamente si es necesario manejarlo en la parte que llama a esta función
-        // throw error;
-      }
-    };
+  //       // Puedes lanzar el error nuevamente si es necesario manejarlo en la parte que llama a esta función
+  //       // throw error;
+  //     }
+  //   };
 
-    // Llamar a la función asíncrona
+  //   // Llamar a la función asíncrona
 
-    fetchData();
-  }, [session]);
+  //   fetchData();
+  // }, [session]);
   const [addresses, setAddresses] = useState();
 
   if (!session) {

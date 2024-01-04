@@ -5,8 +5,9 @@ import * as Yup from "yup";
 import AdminInput from "../../inputs/adminInput";
 import { toast } from "react-toastify";
 import axios from "axios";
-import SingularSelect from "../../selects/SingularSelect";
+import SingularSelect from "../../selects/SingularSelect2";
 export default function Create({ categories, setSubCategories }) {
+  // console.log(categories)
   const [name, setName] = useState("");
   const [parent, setParent] = useState("");
   const validate = Yup.object({
@@ -57,13 +58,15 @@ export default function Create({ categories, setSubCategories }) {
             <SingularSelect
               name="parent"
               value={parent}
-              data={categories}
-              placeholder="Select Category"
+              // data={categories}
+              data={[categories, "category"]}
+
+              placeholder="Select Sub-Category"
               handleChange={(e) => setParent(e.target.value)}
             />
             <div className={styles.btnWrap}>
               <button type="submit" className={`${styles.btn} `}>
-                <span>Add SubCategory</span>
+                <span>Add Sizes</span>
               </button>
             </div>
           </Form>

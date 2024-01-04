@@ -15,6 +15,11 @@ export default function PagePayment() {
   return (
     // <Layout session={session.user}>
     <>
+      <head>
+        <title>Profile / Payment</title>
+        <meta property="og:title" content="My page title" key="title" />
+        <link rel="icon" href="/favicon.ico" />
+      </head>
       <div className={styles.header}>
         <h1>MY PAYMENT METHODS</h1>
       </div>

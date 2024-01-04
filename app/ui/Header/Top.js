@@ -45,7 +45,7 @@ export default function Top({ country }) {
             {session ? (
               <li className={styles.li}>
                 <div className={styles.flex}>
-                  <img src={session?.user?.imagen.url} alt="" />
+                  <img src={session.user?.imagen?.url ? session.user.imagen.url : "https://res.cloudinary.com/deh35rofi/image/upload/v1698237266/blank-profile-picture-973460_1280_rvjszn.jpg"} alt="" />
                   <span>{session?.user?.name}</span>
                   <RiArrowDropDownFill />
                 </div>

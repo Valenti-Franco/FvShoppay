@@ -7,10 +7,12 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 // import { useRouter } from "next/router";
 import { TbBrandAuth0 } from "react-icons/tb";
+import { MdSearch } from "react-icons/md";
 
 export default function BrandsFilter({ brands, brand, brandHandler, updateQueryString, replaceQuery }) {
   const router = useRouter();
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
+
   const [selectedBrand, setSelectedBrand] = useState(brand ? parseInt(brand) : "");
 
   const handleSizeChange = (selectedBrandid) => {
@@ -23,11 +25,12 @@ export default function BrandsFilter({ brands, brand, brandHandler, updateQueryS
   }
   return (
     <div className={styles.filter}>
-      <h3>
-        <b className="flex gap-2"> Brands <TbBrandAuth0 /> </b>  <span onClick={() => setShow(!show)}>{show ? <FaMinus /> : <BsPlusLg />}</span>
-      </h3>
+      <div onClick={() => setShow(!show)} className="  hover:bg-gray-200 flex p-4 rounded-md m-4 items-center justify-between text-center">
+        <div className="flex  gap-4 items-center">  <b className="flex text-xl  gap-2">Brand{" "}</b> <TbBrandAuth0 /></div>
+        <span >{show ? <FaMinus /> : <BsPlusLg />}</span>
+      </div>
       {show && (
-        <div className={styles.filter__sizes}>
+        <div className={styles.filter__brand}>
           {brands.map((brand, i) => {
             // const check = replaceQuery("brand", brand);
             const isSelected = selectedBrand === brand.id;
@@ -43,10 +46,15 @@ export default function BrandsFilter({ brands, brand, brandHandler, updateQueryS
               </button>
             );
           })}
-          <a href={updateQueryString(selectedBrand, "brand")}>Apply Sizes</a>
+
+          {/* <a href={updateQueryString(selectedBrand, "brand")}>Apply Sizes</a> */}
 
         </div>
 
+      )}
+      {selectedBrand > 0 && (
+
+        <a className="flex w-full justify-center items-center text-xs bg-gray-200 font-extrabold  hover:bg-gray-400  p-4 rounded-md border-solid border-2 border-sky-500 " href={updateQueryString(selectedBrand, "brand")}> <div className="flex justify-center gap-4 ">Apply Brand <MdSearch className=" text-lg" /></div> </a>
       )}
     </div>
   );

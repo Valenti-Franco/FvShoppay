@@ -7,7 +7,7 @@ export default function List({ categories, setCategories }) {
       {categories.map((category) => (
         <ListItem
           category={category}
-          key={category._id}
+          key={category.id}
           setCategories={setCategories}
         />
       ))}

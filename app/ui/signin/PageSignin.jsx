@@ -45,6 +45,7 @@ export default function PageSignin({
   country1,
 }) {
   const router = useRouter();
+  const [register, setRegister] = useState(false);
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(initialvalues);
   const {
@@ -90,25 +91,21 @@ export default function PageSignin({
       .required("Confirm your password.")
       .oneOf([Yup.ref("password")], "Passwords must match."),
   });
-  const signUpHandler = async () => {
+  const signUpHandler = async (e) => {
+    console.log(name, email, password);
     try {
       setLoading(true);
-      const { data } = await axios.post("/api/auth/signup", {
-        name,
-        email,
-        password,
-      });
-      setUser({ ...user, error: "", success: data.message });
-      setLoading(false);
-      setTimeout(async () => {
-        let options = {
-          redirect: false,
+      const { data } = await axios.post(
+        "https://fvecommerce.somee.com/api/Usuarios/Register",
+        {
+          nombre: name,
           email: email,
           password: password,
-        };
-        const res = await signIn("credentials", options);
-        Router.push("/");
-      }, 2000);
+        }
+      );
+      // setUser({ ...user, error: "", success: data.message });
+      setLoading(false);
+      setRegister(true);
     } catch (error) {
       setLoading(false);
       setUser({ ...user, success: "", error: error.response.data.message });
@@ -144,6 +141,46 @@ export default function PageSignin({
 
   return (
     <>
+      {register && (
+        <div class=" absolute min-w-full z-20  flex min-h-screen items-center justify-center bg-gray-400  bg-opacity-30">
+          <div class="rounded-lg bg-gray-50 px-16 py-14">
+            <div class="flex justify-center">
+              <div class="rounded-full bg-green-200 p-6">
+                <div class="flex h-16 w-16 items-center justify-center rounded-full bg-green-500 p-4">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="h-8 w-8 text-white"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M4.5 12.75l6 6 9-13.5"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <h3 class="my-4 text-center text-3xl font-semibold text-gray-700">
+              Congratuation!!!
+            </h3>
+            <p class="w-[230px] text-center font-normal text-gray-600">
+              Your order have been taken and is being attended to
+            </p>
+            <button
+              onClick={() => setRegister(false)}
+              class="mx-auto mt-10 block rounded-xl border-4 border-transparent bg-orange-400 px-6 py-3 text-center text-base font-medium text-orange-100 outline-8 hover:outline hover:duration-300"
+            >
+              Track Order
+            </button>
+          </div>
+        </div>
+      )}
+
       {loading && <DotLoaderSpinner loading={loading} />}
       {/* <Header country={country1} /> */}
       {/* <ButtonAuth /> */}
@@ -245,8 +282,8 @@ export default function PageSignin({
                 conf_password,
               }}
               validationSchema={registerValidation}
-              onSubmit={() => {
-                signUpHandler();
+              onSubmit={(e) => {
+                signUpHandler(e);
               }}
             >
               {(form) => (

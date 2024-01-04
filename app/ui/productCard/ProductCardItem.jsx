@@ -8,7 +8,7 @@ const ProductCardItem = async ({ product }) => {
   //     return new Promise((resolve) => setTimeout(resolve, ms));
   //   }
   //   await delay(300);
-  // console.log(product);
+
   return (
     <div className={styles.product} key={product.id}>
       <div className={styles.product__container}>
@@ -20,7 +20,7 @@ const ProductCardItem = async ({ product }) => {
             {/* </Suspense> */}
           </div>
         </Link>
-        {!product.discount ? (
+        {product.discount ? (
           <div className={styles.product__discount}>-15%</div>
         ) : (
           ""

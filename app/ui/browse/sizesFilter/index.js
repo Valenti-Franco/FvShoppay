@@ -8,10 +8,13 @@ import Size from "./Size";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { GiResize } from "react-icons/gi";
+import { MdSearch } from "react-icons/md";
+
 export default function SizesFilter({ sizes, sizeid, sizeHandler, updateQueryString }) {
   const router = useRouter();
 
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
+
   const [selectedSizes, setSelectedSizes] = useState([]);
 
   const handleSizeChange = (selectedSize) => {
@@ -38,27 +41,49 @@ export default function SizesFilter({ sizes, sizeid, sizeHandler, updateQueryStr
   };
   return (
     <div className={styles.filter}>
-      <h3>
+      {/* <h3>
         <b className="flex gap-2 ">Sizes <GiResize /> </b>  <span onClick={() => setShow(!show)}>{show ? <FaMinus /> : <BsPlusLg />}</span>
-      </h3>
+      </h3> */}
+      <div onClick={() => setShow(!show)} className="  hover:bg-gray-200 flex p-4 rounded-md m-4 items-center justify-between text-center">
+        <div className="flex  gap-4 items-center">  <b className="flex text-xl  gap-2">Sizes{" "}</b> <GiResize /></div>
+        <span >{show ? <FaMinus /> : <BsPlusLg />}</span>
+      </div>
       {show && (
         <div className={styles.filter__sizes}>
           {sizes.map((size, i) => (
             <div key={i}
+              className="m-2"
+
 
             >
-              <p>{size.tipo}</p>
-              {size.detalleTamanos?.map((tamanos, i) => (
-                <Size
-                  sizeid={sizeid}
-                  key={tamanos.id}
-                  size={tamanos}
-                  sizeHandler={() => handleSizeChange(tamanos.id)}
-                />
-              ))}
+              <label class="mt-px font-extrabold text-gray-700 cursor-pointer select-none">
+                {size.tipo}
+              </label>
+              <div
+                key={i}
+                className="flex flex-wrap p-2"
+              >
+                {size.detalleTamanos?.map((tamanos, i) => (
+                  <>
+                    <Size
+                      sizeid={sizeid}
+                      key={tamanos.id}
+                      size={tamanos}
+                      sizeHandler={() => handleSizeChange(tamanos.id)}
+                    />
+
+                  </>
+                ))}
+              </div>
+
             </div>
           ))}
-          <Link href={updateQueryString(selectedSizes, "size")}>Apply Sizes</Link>
+          {selectedSizes.length > 0 && (
+
+            <a className="flex justify-center items-center text-xs bg-gray-200 font-extrabold  hover:bg-gray-400  p-4 rounded-md border-solid border-2 border-sky-500 " href={updateQueryString(selectedSizes, "size")}> <div className="flex justify-center gap-4 ">Apply Sizes <MdSearch className=" text-lg" /></div> </a>
+          )}
+
+          {/* <Link href={updateQueryString(selectedSizes, "size")}>Apply Sizes</Link> */}
         </div>
       )}
     </div>

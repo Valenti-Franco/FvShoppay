@@ -10,6 +10,9 @@ export default async function ProductCard() {
   const response = await axios.get('https://fvecommerce.somee.com/api/Productos?pagina=1&tamanoPagina=10');
   const products = response.data;
 
+
+
+  // console.log(products)
   // function delay(ms) {
   //   return new Promise(resolve => setTimeout(resolve, ms));
   // }

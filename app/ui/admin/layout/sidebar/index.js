@@ -5,6 +5,8 @@ import { toggleSidebar } from "../../../../../store/ExpandSlice";
 import {
   MdArrowForwardIos,
   MdOutlineCategory,
+  MdOutlineZoomIn,
+  MdOutlineZoomOut,
   MdSpaceDashboard,
 } from "react-icons/md";
 import { FcSalesPerformance } from "react-icons/fc";
@@ -126,6 +128,27 @@ export default function Sidebar() {
                   <MdOutlineCategory />
                 </div>
                 <span className={styles.show}>Sub-Categories</span>
+              </li>
+            </Link>
+          </ul>
+        </div>
+        <div className={styles.sidebar__dropdown}>
+          <div className={styles.sidebar__dropdown_heading}>
+            <div className={styles.show}>Sizes / DetailSizes</div>
+          </div>
+          <ul className={styles.sidebar__list}>
+            <Link href="/admin/sizes">
+              <li className={route == "categories" ? styles.active : ""}>
+                <MdOutlineZoomIn />
+                <span className={styles.show}>Sizes</span>
+              </li>
+            </Link>
+            <Link href="/admin/detailSizes">
+              <li className={route == "subCategories" ? styles.active : ""}>
+                <div style={{ transform: "rotate(180deg)" }}>
+                  <MdOutlineZoomOut />
+                </div>
+                <span className={styles.show}>Detail-Sizes</span>
               </li>
             </Link>
           </ul>

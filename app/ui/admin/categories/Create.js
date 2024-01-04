@@ -1,3 +1,4 @@
+"use client"
 import { Form, Formik } from "formik";
 import { useState } from "react";
 import styles from "./styles.module.scss";

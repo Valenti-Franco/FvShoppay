@@ -55,7 +55,7 @@ export default function Page() {
   const isMedium = useMediaQuery({ query: "(max-width:1300px)" });
   const isMobile = useMediaQuery({ query: "(max-width:550px)" });
   return (
-    <div>
+    <div style={{ contain: "content" }}>
       <div className={styles.main}>
         <Suspense fallback={<HeaderPlaceHolder />}>
           <Header />

@@ -1,8 +1,11 @@
+
+
 .mainSwiper{
   width: 100%;
   background-color: #d1d1d1;
   border-radius: 30px;
   contain: content;
+
 
   img{
     width: 100%;
@@ -47,6 +50,7 @@
   }
  
   .menu {
+    margin-top: 10px;
     grid-area: menu;
     height: 580px;
     min-width: 300px;

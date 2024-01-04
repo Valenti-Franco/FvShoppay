@@ -4,7 +4,7 @@ import styles from "./styles.module.scss";
 
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Top from "./Top";
 import Ad from "./Ad";
 import { RiSearch2Line } from "react-icons/ri";
@@ -12,7 +12,9 @@ import { FaOpencart } from "react-icons/fa";
 import logo from "../../../public/logo.png";
 
 import { useDispatch, useSelector } from "react-redux";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams, navigate } from "next/navigation";
+import { Autocomplete, TextField } from "@mui/material";
+import axios from "axios";
 
 const Header = () => {
   const router = useRouter();
@@ -22,17 +24,59 @@ const Header = () => {
 
   const [query, setQuery] = useState(search || "all");
   const { data: session, status } = useSession();
+  const [Names, setNames] = useState([]);
 
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        "https://fvecommerce.somee.com/api/Productos?pagina=1&tamanoPagina=1000"
+      );
+
+      const responseData = response.data;
+
+      // Assuming responseData is an array of objects and each object has a 'nombre' property
+      const namesArray = responseData.map((item) => item.nombre);
+
+      // Set the names in the state
+      // console.log(namesArray);
+      setNames(namesArray);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  // Call the fetchData function
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  // const Names = [
+  //   { label: "The Shawshank Redemption", year: 1994 },
+  //   { label: "The Godfather", year: 1972 },
+  //   { label: "The Godfather: Part II", year: 1974 },
+  //   { label: "The Dark Knight", year: 2008 },
+  //   { label: "12 Angry Men", year: 1957 },
+  //   { label: "Schindler's List", year: 1993 },
+  //   { label: "Pulp Fiction", year: 1994 },
+  // ];
   const country = {
     name: "Argentina",
     flag: "https://static.vecteezy.com/system/resources/previews/011/571/494/original/circle-flag-of-argentina-free-png.png",
   };
   const handleSearch = (e) => {
     e.preventDefault();
+    console.log(query);
+    if (query) {
+      router.refresh();
 
-    if (query.length > 1) {
       router.push(`/browse?search=${query}`);
+      console.log(query);
     }
+    // ();
+  };
+  const handleAutocompleteChange = (event, value) => {
+    // 'value' is the selected option from Autocomplete
+    setQuery(value || ""); // Set the query to the selected value or an empty string if nothing is selected
   };
   return (
     <>
@@ -50,30 +94,47 @@ const Header = () => {
       </Link> */}
       </div>
       <div className=" flex justify-center w-full gap-5">
-        <div className=" flex justify-center w-1/2 gap-5">
+        <div className=" flex justify-center  xl:w-1/2 sm:flex-row  flex-col  w-full gap-5">
           <Link href={"/"}>
             <Image width={120} height={50} src={logo.src} />
           </Link>
-          <form onSubmit={(e) => handleSearch(e)} className={styles.search}>
-            <input
+          <div className="flex items-center w-full">
+            <form onSubmit={(e) => handleSearch(e)} className={styles.search}>
+              {/* <input
               className={styles.inputSeach}
               type="text"
               placeholder="Search..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-            />
-            <a
-              href={`/browse?search=${query ? query : "all"}`}
-              type="submit"
-              className={styles.search__icon}
-            >
-              <RiSearch2Line />
-            </a>
-          </form>
-          <Link className={styles.cart} href="/cart">
-            <FaOpencart />
-            <span>{cart.cartItems.length}</span>
-          </Link>
+            /> */}
+              <Autocomplete
+                disablePortal
+                id="combo-box-demo"
+                options={Names}
+                value={query}
+                onChange={handleAutocompleteChange}
+                sx={{ width: "100%" }}
+                renderInput={(params) => (
+                  <TextField
+                    onChange={(e) => setQuery(e.target.value)}
+                    {...params}
+                    label="Search"
+                  />
+                )}
+              />
+              <a
+                href={`/browse?search=${query ? query : "all"}`}
+                type="submit"
+                className={styles.search__icon}
+              >
+                <RiSearch2Line />
+              </a>
+            </form>
+            <Link className={styles.cart} href="/cart">
+              <FaOpencart />
+              <span>{cart.cartItems.length}</span>
+            </Link>
+          </div>
         </div>
       </div>
     </>
