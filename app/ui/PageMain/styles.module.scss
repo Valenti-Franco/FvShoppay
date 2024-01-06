@@ -52,7 +52,9 @@
   .menu {
     margin-top: 10px;
     grid-area: menu;
-    height: 580px;
+    max-height: 580px;
+    height: 100%;
+    overflow-y: auto;
     min-width: 300px;
     background: #fff;
     border-radius: 10px;

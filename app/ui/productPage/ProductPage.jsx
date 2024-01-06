@@ -6,9 +6,10 @@ import Infos from "./infos/Infos";
 import MainSwiper from "./mainSwiper";
 import styles from "../../../styles/product.module.scss";
 import styles1 from "./infos/styles.module.scss";
-
+import { Helmet } from "react-helmet";
 import { useParams } from "next/navigation";
 import ContentLoader from "react-content-loader";
+import Link from "next/link";
 
 const ProductPage = () => {
   const id = useParams();
@@ -42,13 +43,18 @@ const ProductPage = () => {
 
   return (
     <>
-      {product.precio ? (
+      {product.precio && product.nombre ? (
         <>
+          <Helmet>
+            <title>Home / Product / {product.nombre}</title>
+            <meta property="og:title" content="My page title" key="title" />
+            <link rel="icon" href="/favicon.ico" />
+          </Helmet>
           {/* <Header country={country} /> */}
           <div className={styles.product}>
             <div className={styles.product__container}>
               <div className={styles.path}>
-                Home / Product / {product.id}
+                <Link href="/">Home </Link> / Product{" "}
                 {/* {product.subCategories.map((sub) => ( */}
                 <span> / {product.nombre}</span>
                 {/* ))} */}

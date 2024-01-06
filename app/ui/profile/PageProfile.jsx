@@ -20,11 +20,6 @@ import { BsFillBookmarkHeartFill } from "react-icons/bs";
 export default async function PageProfile() {
   return (
     <>
-      <head>
-        <title>Profile</title>
-        <meta property="og:title" content="My page title" key="title" />
-        <link rel="icon" href="/favicon.ico" />
-      </head>
       <section class="bg-white h-full   px-4 lg:px-16">
         <div class="container w-full sticky top-10 px-[12px] md:px-0 xl:px-12 nanum2">
           <div class="grid grid-cols-1   lg:grid-cols-3  gap-x-4 gap-y-28 lg:gap-y-16">

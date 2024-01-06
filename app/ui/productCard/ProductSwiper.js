@@ -39,7 +39,7 @@ export default function ProductSwiper({ images }) {
       >
         {images?.map((img, index) => (
           <SwiperSlide key={img.id}>
-            <Image width={400} height={400} style={{ objectFit: "cover" }} src={img.url} alt="" />
+            <Image width={400} height={400} style={{ objectFit: "contain" }} src={img.url} alt="" />
           </SwiperSlide>
         ))}
       </Swiper>

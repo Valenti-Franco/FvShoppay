@@ -2,7 +2,7 @@ import Image from "next/image";
 import { sidebarData } from "../../../data/profile";
 import Item from "./Item";
 import styles from "./styles.module.scss";
-
+import { Helmet } from 'react-helmet';
 export default function Sidebar({ data, address }) {
   // console.log(address);
   const partesFecha = data.fechaPublicado.split('T');
@@ -11,6 +11,7 @@ export default function Sidebar({ data, address }) {
   const fechaSolo = partesFecha[0];
   return (
     <div className={styles.sidebar}>
+
       <div className={styles.sidebar__container}>
         {/* <Image width={100} height={100} src={data?.imagen?.url} alt="" />
         <span className={styles.sidebar__name}>{data.nombre}</span> */}

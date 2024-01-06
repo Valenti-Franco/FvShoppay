@@ -57,6 +57,11 @@ export default function Page() {
   return (
     <div style={{ contain: "content" }}>
       <div className={styles.main}>
+        <head>
+          <title>Home - FV Shoppay</title>
+          <meta property="og:title" content="My page title" key="title" />
+          <link rel="icon" href="/favicon.ico" />
+        </head>
         <Suspense fallback={<HeaderPlaceHolder />}>
           <Header />
         </Suspense>

@@ -439,7 +439,7 @@ export default function Create() {
         }
       };
 
-      productImgPost(NewProduct.data.id);
+      await productImgPost(NewProduct.data.id);
 
       await Promise.all(
         product.color.map(async (colorId) => {

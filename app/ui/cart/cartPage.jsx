@@ -51,6 +51,11 @@ const CartPage = () => {
   };
   return (
     <div className={styles.cart}>
+      <head>
+        <title>Cart</title>
+        <meta property="og:title" content="My page title" key="title" />
+        <link rel="icon" href="/favicon.ico" />
+      </head>
       {cart.cartItems?.length > 0 ? (
         <div className={styles.cart__container}>
           <CartHeader

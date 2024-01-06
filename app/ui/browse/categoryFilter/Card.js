@@ -12,7 +12,7 @@ export default function Card({ category, categoryHandler, replaceQuery, updateQu
     <>
       {/*  */}
 
-      <section className={show ? " rounded-xl  bg-gray-200" : " rounded-full bg-gray-200"}>
+      <section className={show ? " rounded-xl  bg-gray-200" : " rounded-full "}>
         <div onClick={() => setShow(!show)} className="  flex p-4 rounded-md m-4 items-center justify-between text-center  hover:bg-gray-200">
           <div className="flex  gap-4 items-center">  <p className="flex text-base  gap-2">{category.nombre}</p> </div>
           <span className={show ? " p-2 rounded-full bg-red-300" : " p-2 rounded-full bg-gray-200"} >{show ? <FaMinus /> : <BsPlusLg />}</span>

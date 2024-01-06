@@ -111,7 +111,7 @@ const Header = () => {
                 disablePortal
                 id="combo-box-demo"
                 options={Names}
-                value={query}
+                value={query === "all" ? "" : query}
                 onChange={handleAutocompleteChange}
                 sx={{ width: "100%" }}
                 renderInput={(params) => (
