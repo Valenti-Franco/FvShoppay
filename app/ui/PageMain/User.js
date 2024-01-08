@@ -21,7 +21,7 @@ export default async function User() {
 
   // console.log(session.user)
   return (
-    <div className={styles.user}>
+    <div className={styles.user + " " + "bg-gray-300"}>
       <img
         src="../../../images/userHeader.jpg"
         alt=""
@@ -44,6 +44,7 @@ export default async function User() {
                 href="/Signin"
               >Register</Link>
               <Link
+                className="bg-white"
                 href="/Signin"
               >Login</Link>
 

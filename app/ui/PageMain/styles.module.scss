@@ -49,6 +49,7 @@
     }
   }
  
+ 
   .menu {
     margin-top: 10px;
     grid-area: menu;
@@ -56,9 +57,8 @@
     height: 100%;
     overflow-y: auto;
     min-width: 300px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: $shadow-1;
+    display: flex;
+   
     @media (max-width: 990px) {
       width: 80px;
       svg {
@@ -223,7 +223,7 @@
     position: relative;
     grid-area: user;
     height: 530px;
-    background: #fff;
+    // background: #fff;
     border-radius: 10px;
     box-shadow: $shadow-1;
     @media (max-width: 1232px) {

@@ -9,13 +9,34 @@ export default async function Header() {
     <div className={styles.header}>
       <ul>
         <li>
-          <Link href="">Store</Link>
+          <p>Retail</p>
         </li>
         <li>
-          <Link href="">Electronics</Link>
+          <p>Gadgets</p>
         </li>
         <li>
-          <Link href="">Watches</Link>
+          <p>Timepieces</p>
+        </li>
+        <li>
+          <p>Product Category</p>
+        </li>
+        <li>
+          <p>Smartphone</p>
+        </li>
+        <li>
+          <p>Tech Devices</p>
+        </li>
+        <li>
+          <p>Desktops</p>
+        </li>
+        <li>
+          <p>Gaming Console</p>
+        </li>
+        <li>
+          <p>Apparel</p>
+        </li>
+        <li>
+          <p>Shoes</p>
         </li>
       </ul>
     </div>
