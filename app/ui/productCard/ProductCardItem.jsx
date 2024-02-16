@@ -3,12 +3,11 @@ import ProductSwiper from "./ProductSwiper";
 import styles from "./styles.module.scss";
 import axios from "axios";
 import { Suspense } from "react";
-const ProductCardItem = async ({ product }) => {
+const ProductCardItem = ({ product }) => {
   //   function delay(ms) {
   //     return new Promise((resolve) => setTimeout(resolve, ms));
   //   }
   //   await delay(300);
-
   return (
     <div className={styles.product} key={product.id}>
       <div className={styles.product__container}>

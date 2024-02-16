@@ -1,3 +1,4 @@
+"use client"
 import styles from "./styles.module.scss";
 // import { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -5,11 +6,12 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Navigation } from "swiper";
 import Image from "next/image";
+import ProductCardItem from "../../productCard/ProductCardItem";
 function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-export default async function ProductsSwiper({ header, products, bg }) {
+export default function ProductsSwiper({ header, products, bg, category }) {
 
   return (
     <div className={styles.wrapper}>
@@ -45,23 +47,27 @@ export default async function ProductsSwiper({ header, products, bg }) {
           },
         }}
       >
-        {products.map((product) => (
-          <SwiperSlide key={product.id}>
-            <div className={styles.product}>
-              <div className={styles.product__img}>
-                <Image width={150} height={100} src={product.image} alt="" />
-              </div>
-              <div className={styles.product__infos}>
-                <h1>
-                  {product.name.length > 30
-                    ? `${product.name.slice(0, 30)}...`
-                    : product.name}
-                </h1>
-                {product.price && <span>USD{product.price}$</span>}
-              </div>
-            </div>
-          </SwiperSlide>
-        ))}
+        {/* solo los productos igual a product.categoryId = category */}
+        {products
+          .filter(product => product.categoryId == category)
+          .map((product) => (
+            <SwiperSlide key={product.id}>
+              <ProductCardItem product={product} key={product.id} />
+              {/* <div className={styles.product}>
+                <div className={styles.product__img}>
+                  <Image width={150} height={100} src={product?.imagenes[0]?.url} alt="" />
+                </div>
+                <div className={styles.product__infos}>
+                  <h1>
+                    {product.nombre.length > 30
+                      ? `${product.nombre.slice(0, 30)}...`
+                      : product.nombre}
+                  </h1>
+                  {product.price && <span>USD{product.precio}$</span>}
+                </div>
+              </div> */}
+            </SwiperSlide>
+          ))}
       </Swiper>
 
     </div>

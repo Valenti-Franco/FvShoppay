@@ -1,3 +1,4 @@
+"use client"
 import Link from "next/link";
 import ProductSwiper from "./ProductSwiper";
 import styles from "./styles.module.scss";
@@ -6,20 +7,7 @@ import { Suspense } from "react";
 import ProductCardItem from "./ProductCardItem";
 import { SwiperSlide } from "swiper/react";
 
-export default async function ProductCard() {
-  const response = await axios.get('https://fvecommerce.somee.com/api/Productos?pagina=1&tamanoPagina=10');
-  const products = response.data;
-
-
-
-  // console.log(products)
-  // function delay(ms) {
-  //   return new Promise(resolve => setTimeout(resolve, ms));
-  // }
-
-  // // Define the Menu function as an async function
-  // // Use the delay function to pause execution for 3000 milliseconds (3 seconds)
-  // await delay(3000);
+export default function ProductCard({ products }) {
 
   return (
 

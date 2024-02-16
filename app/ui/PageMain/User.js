@@ -1,3 +1,4 @@
+"use client"
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import styles from "./styles.module.scss";
@@ -16,12 +17,12 @@ import "swiper/css/effect-cards";
 import { EffectCards, Navigation } from "swiper";
 import { userSwiperArray } from "../../data/home";
 
-export default async function User() {
+export default function User() {
   const { data: session } = useSession();
 
   // console.log(session.user)
   return (
-    <div className={styles.user + " " + "bg-gray-300"}>
+    <div className={styles.user + " " + ""}>
       <img
         src="../../../images/userHeader.jpg"
         alt=""

@@ -1,4 +1,4 @@
-// "use client"
+"use client"
 import styles from "./styles.module.scss";
 import { MdFlashOn } from "react-icons/md";
 import Countdown from "../countdown"

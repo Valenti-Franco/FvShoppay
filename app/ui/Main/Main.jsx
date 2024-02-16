@@ -1,21 +1,25 @@
-import Menu from "./ui/PageMain/index";
-import Offers from "./ui/PageMain/offers";
-import Header from "./ui/PageMain/Header";
-import Footer from "./ui/PageMain/footer";
+import AcmeLogo from "@/app/ui/acme-logo";
+import Image from "next/image";
+import Menu from "../PageMain/index";
+import Offers from "../PageMain/offers";
+import Header from "../PageMain/Header";
+import Footer from "../PageMain/footer";
 
-import ProductsSwiper from "./ui/PageMain/productsSwiper";
-// import ProductCard from "./ui/productCard";
-// import ProductCard from './ui/productCard'
+import UserSsr from "../PageMain/UserSsr";
+import MainSwiperSrr from "../PageMain/MainSwiperSSr";
+
+import ProductsSwiper from "../PageMain/productsSwiper/ProductsSwiperSsr";
+// import ProductCard from "../productCard/ProductCardSsr";
 // import { Swiper, SwiperSlide } from "swiper/react";
 // import "swiper/css";
 // import "swiper/css/pagination";
-// import { Navigation } from "swiper";
-// import { useSession } from "next-auth/react";
-import styles from "./ui/PageMain/styles.module.scss";
-import styles2 from "./ui/PageMain/productsSwiper/styles.module.scss";
-import FlashDeals from "./ui/flashDeals";
+import { Navigation } from "swiper";
+import styles from "../PageMain/styles.module.scss";
+// import styles2 from "../PageMain/productsSwiper/styles.module.scss";
 
-import { useMediaQuery } from "react-responsive";
+import FlashDeals from "../flashDeals";
+
+// import { useMediaQuery } from "react-responsive";
 import {
   gamingSwiper,
   homeImprovSwiper,
@@ -23,28 +27,25 @@ import {
   women_dresses,
   women_shoes,
   women_swiper,
-} from "./data/home";
+} from "../../data/home";
 
-import Category from "./ui/PageMain/category";
+import Category from "../PageMain/category";
 
 import Link from "next/link";
 // import axios from 'axios';
-// import { Suspense, useEffect } from 'react';
-import ContentLoader from "react-content-loader";
 import { Suspense } from "react";
-import HeaderPlaceHolder from "./ui/PageMain/HeaderPlaceHolder";
-import MenuPlaceHolder from "./ui/PageMain/MenuPlaceHolder";
-import OffersPlaceHolder from "./ui/PageMain/OffersPlaceHolder";
-import MainSwiperPlaceHolder from "./ui/PageMain/MainSwiperPlaceHolder";
-import UserPlaceHolder from "./ui/PageMain/UserPlaceHolder";
-import MainSwiperSrr from "./ui/PageMain/MainSwiperSsr";
-import UserSsr from "./ui/PageMain/UserSsr";
+import ContentLoader from "react-content-loader";
+import HeaderPlaceHolder from "../PageMain/HeaderPlaceHolder";
+import MenuPlaceHolder from "../PageMain/MenuPlaceHolder";
+import OffersPlaceHolder from "../PageMain/OffersPlaceHolder";
+import MainSwiperPlaceHolder from "../PageMain/MainSwiperPlaceHolder";
+import UserPlaceHolder from "../PageMain/UserPlaceHolder";
 
-import FlashDealsPlaceHolder from "./ui/flashDeals/flashPlaceHolder";
-import { fetchProducts } from "./lib/data";
+import FlashDealsPlaceHolder from "../flashDeals/flashPlaceHolder";
 
-export default async function Page() {
-  const products = await fetchProducts();
+export default function Main() {
+  //   const isMedium = useMediaQuery({ query: "(max-width:1300px)" });
+  //   const isMobile = useMediaQuery({ query: "(max-width:550px)" });
   return (
     <div style={{ contain: "content" }}>
       <div className={styles.main}>
@@ -113,7 +114,7 @@ export default async function Page() {
 
       <Suspense fallback={<FlashDealsPlaceHolder />}>
         <ProductsSwiper
-          products={products}
+          products={women_swiper}
           bg="#ff82ff"
           category="1"
           header="Clothes"
@@ -121,7 +122,7 @@ export default async function Page() {
       </Suspense>
       <Suspense fallback={<FlashDealsPlaceHolder />}>
         <ProductsSwiper
-          products={products}
+          products={gamingSwiper}
           bg="#2f82ff"
           category="2"
           header="Electronics"
@@ -129,7 +130,7 @@ export default async function Page() {
       </Suspense>
       <Suspense fallback={<FlashDealsPlaceHolder />}>
         <ProductsSwiper
-          products={products}
+          products={homeImprovSwiper}
           header="For Gamers"
           bg="#5a31f4"
           category="3"

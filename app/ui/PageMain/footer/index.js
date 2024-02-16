@@ -13,7 +13,7 @@ export default function Footer({ country }) {
         <Socials />
         {/* <NewsLetter /> */}
         <Payment />
-        <Copyright country={country} />
+        {/* <Copyright country={country} /> */}
 
       </div>
     </footer>

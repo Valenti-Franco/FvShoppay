@@ -1,4 +1,4 @@
-// "use client"
+"use client"
 
 import styles from "./styles.module.scss";
 import { offersAarray } from "../../data/home";
@@ -19,7 +19,7 @@ function delay(ms) {
 import Link from "next/link";
 import Image from "next/image";
 
-export default async function Offers() {
+export default function Offers() {
 
   // console.log(offersAarray)
   return (
