@@ -37,7 +37,7 @@ import MenuPlaceHolder from "./ui/PageMain/MenuPlaceHolder";
 import OffersPlaceHolder from "./ui/PageMain/OffersPlaceHolder";
 import MainSwiperPlaceHolder from "./ui/PageMain/MainSwiperPlaceHolder";
 import UserPlaceHolder from "./ui/PageMain/UserPlaceHolder";
-import MainSwiperSrr from "./ui/PageMain/MainSwiperSsr";
+import MainSwiperSSr from "./ui/PageMain/MainSwiperSSr";
 import UserSsr from "./ui/PageMain/UserSsr";
 
 import FlashDealsPlaceHolder from "./ui/flashDeals/flashPlaceHolder";
@@ -61,7 +61,7 @@ export default async function Page() {
           <Menu />
         </Suspense>
         <Suspense fallback={<MainSwiperPlaceHolder />}>
-          <MainSwiperSrr />
+          <MainSwiperSSr />
         </Suspense>
         <Suspense fallback={<OffersPlaceHolder />}>
           <Offers />
@@ -111,30 +111,30 @@ export default async function Page() {
         </Suspense>
       </div>
 
-      <Suspense fallback={<FlashDealsPlaceHolder />}>
-        <ProductsSwiper
-          products={products}
-          bg="#ff82ff"
-          category="1"
-          header="Clothes"
-        />
-      </Suspense>
-      <Suspense fallback={<FlashDealsPlaceHolder />}>
-        <ProductsSwiper
-          products={products}
-          bg="#2f82ff"
-          category="2"
-          header="Electronics"
-        />
-      </Suspense>
-      <Suspense fallback={<FlashDealsPlaceHolder />}>
-        <ProductsSwiper
-          products={products}
-          header="For Gamers"
-          bg="#5a31f4"
-          category="3"
-        />
-      </Suspense>
+      {/* <Suspense fallback={<FlashDealsPlaceHolder />}> */}
+      <ProductsSwiper
+        products={products}
+        bg="#ff82ff"
+        category="1"
+        header="Clothes"
+      />
+      {/* </Suspense> */}
+      {/* <Suspense fallback={<FlashDealsPlaceHolder />}> */}
+      <ProductsSwiper
+        products={products}
+        bg="#2f82ff"
+        category="2"
+        header="Electronics"
+      />
+      {/* </Suspense> */}
+      {/* <Suspense fallback={<FlashDealsPlaceHolder />}> */}
+      <ProductsSwiper
+        products={products}
+        header="For Gamers"
+        bg="#5a31f4"
+        category="3"
+      />
+      {/* </Suspense> */}
       {/* <div className={styles2.wrapper}>
         <div className={styles2.header} style={{ background: `red` }}>
           Products
