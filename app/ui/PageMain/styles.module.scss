@@ -24,9 +24,9 @@
   @media (max-width: 1232px) {
     grid-template-columns: 1fr 3fr;
   }
-  @media (max-width: 990px) {
-    grid-template-columns: 80px 3fr;
-  }
+  // @media (max-width: 990px) {
+  //   grid-template-columns: 80px 3fr;
+  // }
   @media (max-width: 730px) {
     grid-template-areas:
       "menu"
@@ -349,6 +349,7 @@
   // display: grid;
   // grid-template-columns: repeat(2, 1fr);
   // grid-row: auto;
+  min-height: 300px;
   display: flex;
   flex-wrap: wrap;
   contain: content;
