@@ -62,13 +62,17 @@ const MainCategory = () => {
                     onClick={() => setselected(category.id)}
                     key={category.id}
                   >
-                    <motion.div className="w-1/2">
-                      {category.id === 1 ? <Clothing /> : ""}
-                      {category.id === 2 ? <Electronic /> : ""}
-                      {category.id === 3 ? <Gaming /> : ""}
-                      {category.id === 4 ? <WomenClothing /> : ""}
-                    </motion.div>
-                    <p>{category.nombre} </p>
+                    <picture className="relative  flex justify-center items-center w-full h-full">
+                      <motion.div className=" h-full w-1/2">
+                        {category.id === 1 ? <Clothing /> : ""}
+                        {category.id === 2 ? <Electronic /> : ""}
+                        {category.id === 3 ? <Gaming /> : ""}
+                        {category.id === 4 ? <WomenClothing /> : ""}
+                      </motion.div>
+                      <p className=" absolute bottom-0 z-10 font-extrabold   bg-opacity-40">
+                        {category.nombre}{" "}
+                      </p>
+                    </picture>
                   </motion.div>
                 )
               )}

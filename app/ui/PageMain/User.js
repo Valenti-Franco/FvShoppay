@@ -16,6 +16,7 @@ import "swiper/css/effect-cards";
 // import required modules
 import { EffectCards, Navigation } from "swiper";
 import { userSwiperArray } from "../../data/home";
+import Image from "next/image";
 
 export default function User() {
   const { data: session } = useSession();
@@ -111,16 +112,17 @@ export default function User() {
         >
           {userSwiperArray.map((item, index) => (
             <SwiperSlide key={index}>
-              <Link href="">
-                <img
-                  style={{
-                    maxWidth: "180px",
-                    height: "240px",
-                    borderRadius: "10px"
-                    // marginTop: "1rem",
-                  }}
-                  src={item.image} alt="" />
-              </Link>
+              <Image
+                width="180"
+                height="240"
+                style={{
+                  maxWidth: "180px",
+                  height: "240px",
+                  borderRadius: "10px"
+                  // marginTop: "1rem",
+                }}
+                src={item.image} alt=""
+              />
             </SwiperSlide>
           ))}
         </Swiper>

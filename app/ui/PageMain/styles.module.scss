@@ -372,17 +372,44 @@
   gap: 10px;
   padding: 10px;
   box-shadow: $shadow-1 ;
-  background: #3c63d900;
+  
+
+
+  p{
+    width: 100%;
+  background: #ffffffce !important;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: 800;
+  font-size: 1.2rem;
+  
+  }
 
   cursor: pointer;
   // transition: 0.2s;
-  
+  img{
+    // width: 100px;
+    // height: 100px;
+    object-fit: contain;
+  }
   &:hover{
+    p{
+      color: #fff;
+      width: 100%;
+    background: #1d1d1dce !important;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1.2rem;
+    
+    }
+    
     // transform: scale(1.15);
     // border: 3px solid #000000;
   // box-shadow: 0 0 1px 14px  #00000051;
-  color: #fff;
-  font-weight: bold;
+
+
+  
   // font-size: 28px;
   background: linear-gradient($blue-color, #0000ff34);
     border-radius: 10px;
@@ -390,15 +417,23 @@
       fill: #fff;
     }
   }
-  svg{
+  img{
     // width: 100px;
     // height: 100px;
-    object-fit: contain;
+    object-fit: cover;
   }
 }
 .selected{
-  color: #fff;
-  font-weight: bold;
+  p{
+    color: #fff;
+    width: 100%;
+  background: #1d1d1dce !important;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1.2rem;
+  
+  }
   background: linear-gradient($blue-color, #0000ff34);
     border-radius: 10px;
     svg{
@@ -411,27 +446,24 @@
     align-items: center;
     gap: 1rem;
     p {
-      text-transform: uppercase;
-      border: 1px solid rgba(0, 0, 0, 0.2);
+      width: 100px;
+      margin-top: 2rem;
       display: flex;
-align-items: center;
-justify-content: center;
-      width: 150px;
-      height: 35px;
-      border-radius: 10px;
-      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      background: $blue-color;
+      height: 40px;
       font-weight: 600;
-      &:first-of-type {
-
-        background: linear-gradient($blue-color, #0000ff34);
-        color: #fff;
+      font-size: 1rem;
+      color: #fff;
+      border: 1px solid #fff;
+      animation: all 0.2s ease-in-out;
+      border-color: #fff;
+      &:hover {
+        transform: scale(1.05);
+        font-size: 16px;
       }
-      &:last-of-type {
-        color: #fff;
-
-      }
-    
-  }
+    }
   &__back{
   color: #fff;
   height: 80px;
@@ -447,7 +479,7 @@ justify-content: center;
       cursor: pointer;
       font-weight: 600;
       &:first-of-type {
-        background: linear-gradient($error-color, #0000ff34);
+        background: linear-gradient($error-color, #00000034);
         color: #fff;
       }
   

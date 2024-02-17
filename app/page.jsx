@@ -1,9 +1,9 @@
 import Menu from "./ui/PageMain/index";
-import Offers from "./ui/PageMain/offers";
+import OffersSsr from "./ui/PageMain/OffersSsr";
 import Header from "./ui/PageMain/Header";
 import Footer from "./ui/PageMain/footer";
 
-import ProductsSwiper from "./ui/PageMain/productsSwiper";
+import ProductsSwiperSrr from "./ui/PageMain/productsSwiper/ProductsSwiperSsr";
 // import ProductCard from "./ui/productCard";
 // import ProductCard from './ui/productCard'
 // import { Swiper, SwiperSlide } from "swiper/react";
@@ -43,103 +43,111 @@ import UserSsr from "./ui/PageMain/UserSsr";
 import FlashDealsPlaceHolder from "./ui/flashDeals/flashPlaceHolder";
 import { fetchProducts } from "./lib/data";
 
+export const metadata = {
+  title: "FV Shoppay, shop for your favorite products",
+  description:
+    "Welcome to FV Shoppay, the best place to shop for your favorite products",
+};
+
 export default async function Page() {
   const products = await fetchProducts();
   return (
-    <div style={{ contain: "content" }}>
-      <div className={styles.main}>
-        <head>
-          <title>Home - FV Shoppay</title>
-          <meta property="og:title" content="My page title" key="title" />
-          <link rel="icon" href="/favicon.ico" />
-        </head>
-        <Suspense fallback={<HeaderPlaceHolder />}>
-          <Header />
-        </Suspense>
+    <>
+      <head>
+        <title>Home - FV Shoppay</title>
+        <meta property="og:title" content="My page title" key="title" />
+        <link rel="icon" href="/favicon.ico" />
+      </head>
+      <main>
+        <div style={{ contain: "content" }}>
+          <div className={styles.main}>
+            <Suspense fallback={<HeaderPlaceHolder />}>
+              <Header />
+            </Suspense>
 
-        <Suspense fallback={<MenuPlaceHolder />}>
-          <Menu />
-        </Suspense>
-        <Suspense fallback={<MainSwiperPlaceHolder />}>
-          <MainSwiperSSr />
-        </Suspense>
-        <Suspense fallback={<OffersPlaceHolder />}>
-          <Offers />
-        </Suspense>
-        <Suspense fallback={<UserPlaceHolder />}>
-          <UserSsr />
-        </Suspense>
-      </div>
+            <Suspense fallback={<MenuPlaceHolder />}>
+              <Menu />
+            </Suspense>
+            <Suspense fallback={<MainSwiperPlaceHolder />}>
+              <MainSwiperSSr />
+            </Suspense>
+            <Suspense fallback={<OffersPlaceHolder />}>
+              <OffersSsr />
+            </Suspense>
+            <Suspense fallback={<UserPlaceHolder />}>
+              <UserSsr />
+            </Suspense>
+          </div>
 
-      <Suspense fallback={<FlashDealsPlaceHolder />}>
-        <FlashDeals />
-      </Suspense>
-
-      <div className=" flex justify-around  max-md:flex-col ">
-        <Suspense fallback={<FlashDealsPlaceHolder />}>
-          <Category
-            header="Dresses"
-            products={women_dresses}
-            background="#5a31f4"
-          />
-        </Suspense>
-
-        <div className=" hidden lg:block ">
           <Suspense fallback={<FlashDealsPlaceHolder />}>
-            <Category
-              header="Shoes"
-              products={women_shoes}
-              background="#3c811f"
-            />
+            <FlashDeals />
           </Suspense>
-        </div>
-        <div className=" lg:hidden block ">
-          <Suspense fallback={<FlashDealsPlaceHolder />}>
-            <Category
-              header="Shoes"
-              products={women_shoes}
-              background="#3c811f"
-            />
-          </Suspense>
-        </div>
-        <Suspense fallback={<FlashDealsPlaceHolder />}>
-          <Category
-            header="Accessories"
-            products={women_accessories}
-            background="#000"
-          />
-        </Suspense>
-      </div>
 
-      {/* <Suspense fallback={<FlashDealsPlaceHolder />}> */}
-      <ProductsSwiper
-        products={products}
-        bg="#ff82ff"
-        category="1"
-        header="Clothes"
-      />
-      {/* </Suspense> */}
-      {/* <Suspense fallback={<FlashDealsPlaceHolder />}> */}
-      <ProductsSwiper
-        products={products}
-        bg="#2f82ff"
-        category="2"
-        header="Electronics"
-      />
-      {/* </Suspense> */}
-      {/* <Suspense fallback={<FlashDealsPlaceHolder />}> */}
-      <ProductsSwiper
-        products={products}
-        header="For Gamers"
-        bg="#5a31f4"
-        category="3"
-      />
-      {/* </Suspense> */}
-      {/* <div className={styles2.wrapper}>
+          <div className=" flex justify-around  max-md:flex-col ">
+            <Suspense fallback={<FlashDealsPlaceHolder />}>
+              <Category
+                header="Dresses"
+                products={women_dresses}
+                background="#5a31f4"
+              />
+            </Suspense>
+
+            <div className=" hidden lg:block ">
+              <Suspense fallback={<FlashDealsPlaceHolder />}>
+                <Category
+                  header="Shoes"
+                  products={women_shoes}
+                  background="#3c811f"
+                />
+              </Suspense>
+            </div>
+            <div className=" lg:hidden block ">
+              <Suspense fallback={<FlashDealsPlaceHolder />}>
+                <Category
+                  header="Shoes"
+                  products={women_shoes}
+                  background="#3c811f"
+                />
+              </Suspense>
+            </div>
+            <Suspense fallback={<FlashDealsPlaceHolder />}>
+              <Category
+                header="Accessories"
+                products={women_accessories}
+                background="#000"
+              />
+            </Suspense>
+          </div>
+
+          {/* <Suspense fallback={<FlashDealsPlaceHolder />}> */}
+          <ProductsSwiperSrr
+            products={products}
+            bg="#ff82ff"
+            category="1"
+            header="Clothes"
+          />
+          {/* </Suspense> */}
+          {/* <Suspense fallback={<FlashDealsPlaceHolder />}> */}
+          <ProductsSwiperSrr
+            products={products}
+            bg="#2f82ff"
+            category="2"
+            header="Electronics"
+          />
+          {/* </Suspense> */}
+          {/* <Suspense fallback={<FlashDealsPlaceHolder />}> */}
+          <ProductsSwiperSrr
+            products={products}
+            header="For Gamers"
+            bg="#5a31f4"
+            category="3"
+          />
+          {/* </Suspense> */}
+          {/* <div className={styles2.wrapper}>
         <div className={styles2.header} style={{ background: `red` }}>
           Products
         </div> */}
-      {/* <Suspense
+          {/* <Suspense
            fallback={
              <div className="flex">
                <SwiperSlide style={{ width: "300px" }}>
@@ -195,9 +203,11 @@ export default async function Page() {
          >
            <ProductCard />
          </Suspense> */}
-      {/* </div> */}
-      <Footer />
-    </div>
+          {/* </div> */}
+          <Footer />
+        </div>
+      </main>
+    </>
   );
 }
 {

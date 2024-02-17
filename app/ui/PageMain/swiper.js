@@ -42,7 +42,7 @@ export default function MainSwiper() {
         {[...Array(10).keys()].map((i, index) => (
           <SwiperSlide
             key={index}>
-            <Image width={600} height={500} src={`/swiper/${i + 1}.jpg`} alt="" />
+            <Image width={1000} height={1000} src={`/swiper/${i + 1}.jpg`} alt="" />
             <Image className={styles.imgBg} width={1000} height={500} src={`/swiper/${i + 1}.jpg`} alt="" />
 
           </SwiperSlide>
