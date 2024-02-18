@@ -10,11 +10,12 @@ import Ad from "./Ad";
 import { RiSearch2Line } from "react-icons/ri";
 import { FaOpencart } from "react-icons/fa";
 import logo from "../../../public/logo.png";
-
+require("dotenv").config();
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter, useSearchParams, navigate } from "next/navigation";
 import { Autocomplete, TextField } from "@mui/material";
 import axios from "axios";
+import { motion } from "framer-motion";
 
 const Header = () => {
   const router = useRouter();
@@ -25,7 +26,56 @@ const Header = () => {
   const [query, setQuery] = useState(search || "all");
   const { data: session, status } = useSession();
   const [Names, setNames] = useState([]);
+  const [country, setcountry] = useState("");
+  // const countryGet = async () => {
+  //   const response = await axios.get(`https://api.ipregistry.co/?key={procces.env.IPREGISTER}`);
+  //   const data = await response.json();
+  //   console.log(data);
 
+  // }
+  // Fetch the data from the API
+
+  const CountryGet = async () => {
+    try {
+      const hasFetchedData = localStorage.getItem("hasFetchedData");
+
+      if (hasFetchedData) {
+        // Si ya se ha hecho la solicitud, no se hace nuevamente
+        setcountry(JSON.parse(hasFetchedData));
+        return;
+      }
+
+      const response = await axios.get(
+        `https://api.ipregistry.co/?key=m28ilfla102o193t`
+      );
+      const responseData = response.data;
+      setcountry({
+        name: responseData.location.country.name,
+        flag: responseData.location.country.flag.emojitwo,
+      });
+
+      // Almacenar el valor en el almacenamiento local para recordar que se ha hecho la solicitud
+      //guarda la respuesta
+      localStorage.setItem(
+        "hasFetchedData",
+        JSON.stringify({
+          name: responseData.location.country.name,
+          flag: responseData.location.country.flag.emojitwo,
+        })
+      );
+      // localStorage.setItem("hasFetchedData", {
+      //   name: responseData.location.country.name,
+      //   flag: responseData.location.country.flag.emojitwo,
+      // });
+    } catch (error) {
+      console.log("first");
+      console.error("Error fetching data:", error);
+      setcountry({
+        name: "Argentina",
+        flag: "https://cdn.ipregistry.co/flags/emojitwo/ar.svg",
+      });
+    }
+  };
   const fetchData = async () => {
     try {
       const response = await axios.get(
@@ -48,6 +98,7 @@ const Header = () => {
   // Call the fetchData function
   useEffect(() => {
     fetchData();
+    CountryGet();
   }, []);
 
   // const Names = [
@@ -59,10 +110,7 @@ const Header = () => {
   //   { label: "Schindler's List", year: 1993 },
   //   { label: "Pulp Fiction", year: 1994 },
   // ];
-  const country = {
-    name: "Argentina",
-    flag: "https://static.vecteezy.com/system/resources/previews/011/571/494/original/circle-flag-of-argentina-free-png.png",
-  };
+
   const handleSearch = (e) => {
     e.preventDefault();
     console.log(query);
@@ -122,17 +170,27 @@ const Header = () => {
                   />
                 )}
               />
-              <a
-                href={`/browse?search=${query ? query : "all"}`}
-                type="submit"
-                className={styles.search__icon}
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
               >
-                <RiSearch2Line />
-              </a>
+                <Link
+                  href={`/browse?search=${query ? query : "all"}`}
+                  type="submit"
+                  className={styles.search__icon}
+                >
+                  <RiSearch2Line />
+                </Link>
+              </motion.button>
             </form>
             <Link className={styles.cart} href="/cart">
-              <FaOpencart />
-              <span>{cart.cartItems.length}</span>
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <FaOpencart />
+                <span>{cart.cartItems.length}</span>
+              </motion.button>
             </Link>
           </div>
         </div>

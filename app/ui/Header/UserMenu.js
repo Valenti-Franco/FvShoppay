@@ -2,6 +2,7 @@ import Link from "next/link";
 import styles from "./styles.module.scss";
 
 import { signOut, signIn } from "next-auth/react";
+import { motion } from "framer-motion";
 // import { ConnectingAirportsOutlined } from "@mui/icons-material";
 
 
@@ -19,33 +20,61 @@ export default function UserMenu({ session }) {
           <div className={styles.col}>
             <span>Welcome Back,</span>
             <h3>{session?.user?.nombre}</h3>
-            <span onClick={() => signOut()}>Sign out</span>
+            <motion.span
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+
+              onClick={() => signOut()}>Sign out</motion.span>
           </div>
         </div>
       ) : (
-        <div className={styles.flex}>
-          <button className={styles.btn_primary}>Register</button>
-          <Link className={styles.btn_outlined} href={"/Signin"}>
-            Login
+        <div className={styles.flex + " " + "justify-center"}>
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
 
-          </Link>
+            className={styles.btn_primary + " " + "w-1/2"}>Register</motion.button>
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}>
+
+            <Link className={styles.btn_outlined + " " + "w-1/2"} href={"/Signin"}>
+              Login
+
+            </Link>
+          </motion.button>
 
         </div>
       )}
       <ul>
-        <li>
-          <Link href="/profile">Account</Link>
-        </li>
-        <li>
-          <Link href="/profile/orders">My Orders</Link>
-        </li>
+        <motion.li
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        >
 
-        <li>
+          <Link href="/profile">Account</Link>
+        </motion.li>
+        <motion.li
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <Link href="/profile/orders">My Orders</Link>
+        </motion.li>
+
+        <motion.li
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        >
           <Link href="/profile/address">Address</Link>
-        </li>
-        <li>
+        </motion.li>
+
+        <motion.li
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        >
           <Link href="/profile/wishlist">Wishlist</Link>
-        </li>
+        </motion.li>
+
       </ul>
     </div>
   );

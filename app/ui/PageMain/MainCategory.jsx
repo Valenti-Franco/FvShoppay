@@ -14,7 +14,6 @@ const MainCategory = () => {
   const [category, setcategory] = useState(false);
   const getCategory = async () => {
     const cat = await axios("https://fvecommerce.somee.com/api/Category");
-    console.log(cat.data);
     setcategory(cat.data);
   };
   useEffect(() => {

@@ -71,7 +71,6 @@ const layout = async ({ children }) => {
       },
       secret: process.env.JWT_SECRET,
     });
-    console.log("first");
 
     const user = await axios(
       "https://fvecommerce.somee.com/api/Usuarios/ObtenerUsuario",

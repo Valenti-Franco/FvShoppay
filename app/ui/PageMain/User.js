@@ -17,79 +17,111 @@ import "swiper/css/effect-cards";
 import { EffectCards, Navigation } from "swiper";
 import { userSwiperArray } from "../../data/home";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export default function User() {
   const { data: session } = useSession();
 
   // console.log(session.user)
   return (
-    <div className={styles.user + " " + ""}>
-      <img
-        src="../../../images/userHeader.jpg"
+    <div className={styles.user}>
+      {/* <Image
+        width={200}
+        height={200}
+        src="/images/userHeader.jpg"
         alt=""
         className={styles.user__header}
-      />
+      /> */}
       <div className={styles.user__container}>
         {session ? (
           <div className={styles.user__infos}>
-            <img src={session.user?.imagen?.url ? session.user.imagen.url : "https://res.cloudinary.com/deh35rofi/image/upload/v1698237266/blank-profile-picture-973460_1280_rvjszn.jpg"} alt="" />
+            <Image
+              width={200}
+              height={200}
+              src={session.user?.imagen?.url ? session.user.imagen.url : "https://res.cloudinary.com/deh35rofi/image/upload/v1698237266/blank-profile-picture-973460_1280_rvjszn.jpg"} alt="" />
             <h4>{session?.user?.nombre}</h4>
           </div>
         ) : (
           <div className={styles.user__infos}>
-            <img
+            <Image
+              width={200}
+              height={200}
               src="https://res.cloudinary.com/dmhcnhtng/image/upload/v1664642478/992490_b0iqzq.png"
               alt=""
             />
             <div className={styles.user__infos_btns}>
               <Link
                 href="/Signin"
-              >Register</Link>
+              >
+                <motion.p
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+
+                >
+                  Register
+                </motion.p>
+              </Link>
               <Link
                 className="bg-white"
                 href="/Signin"
-              >Login</Link>
+              >
+                <motion.p
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+
+                >
+                  Login
+                </motion.p>
+              </Link>
 
             </div>
           </div>
         )}
         <ul className={styles.user__links}>
-          <li>
+          <motion.li
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
             <Link href="/profile">
 
               <IoSettingsOutline />
 
             </Link>
-          </li>
-          <li>
-            <Link href="">
+          </motion.li>
+          <motion.li
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
+
+
+            <Link href="/profile/orders">
 
               <HiOutlineClipboardList />
 
             </Link>
-          </li>
-          <li>
-            <Link href="">
+          </motion.li>
 
-              <AiOutlineMessage />
 
-            </Link>
-          </li>
-          <li>
-            <Link href="">
+          <motion.li
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
+
+
+            <Link href="/profile/wishlist">
 
               <BsHeart />
 
             </Link>
-          </li>
-        </ul>
+          </motion.li>
+        </ul >
 
-      </div>
-      <img
+      </div >
+      {/* <img
         src="../../../images/userHeader.jpg"
         alt=""
         className={styles.user__footer}
-      />
+      /> */}
 
 
       <div className={styles.user__swiper}>
@@ -127,6 +159,6 @@ export default function User() {
           ))}
         </Swiper>
       </div>
-    </div>
+    </div >
   );
 }
