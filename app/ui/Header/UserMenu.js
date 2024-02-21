@@ -8,10 +8,16 @@ import { motion } from "framer-motion";
 
 export default function UserMenu({ session }) {
 
-
   return (
 
-    <div className={styles.menu}>
+    <motion.div
+      initial={{ x: 100 }}
+      animate={{ x: 0 }}
+      exit={{ opacity: 0, x: 100 }}
+      transition={{ duration: 0.5 }}
+
+
+      className={styles.menu}>
 
       <h4>Welcome to FV Shoppay !</h4>
       {session ? (
@@ -33,7 +39,12 @@ export default function UserMenu({ session }) {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
 
-            className={styles.btn_primary + " " + "w-1/2"}>Register</motion.button>
+            className={styles.btn_primary + " " + "w-1/2"}>
+            <Link href={"/Signin"}>
+              Register
+
+            </Link>
+          </motion.button>
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}>
@@ -76,6 +87,6 @@ export default function UserMenu({ session }) {
         </motion.li>
 
       </ul>
-    </div>
+    </motion.div>
   );
 }

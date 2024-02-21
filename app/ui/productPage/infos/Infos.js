@@ -3,7 +3,7 @@
 import styles from "./styles.module.scss";
 import Rating from "@mui/material/Rating";
 import { useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 // import Link from "next/Link";
 import { TbPlus, TbMinus } from "react-icons/tb";
 import { useEffect } from "react";
@@ -15,8 +15,9 @@ import axios from "axios";
 import DialogModal from "../../dialogModal";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, updateCart } from "../../../../store/cartSlice";
+
 import { hideDialog, showDialog } from "../../../../store/DialogSlice"
-import { signIn, useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 export default function Infos({ product, setActiveImg }) {
   // const router = useRouter();
   const dispatch = useDispatch();
@@ -26,7 +27,56 @@ export default function Infos({ product, setActiveImg }) {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const { cart } = useSelector((state) => ({ ...state }));
+  const [inCart, setinCart] = useState(false)
+  const [inWishlist, setinWishlist] = useState(false)
+  const router = useRouter();
+  // console.log(cart.cartItems)
+  const inCartHandler = () => {
+    let exist = cart?.cartItems?.find((p) => p.id === product.id);
+    if (exist) {
+      setinCart(true)
+    }
+    else {
+      setinCart(false)
+    }
+  }
+  useEffect(() => {
+    inCartHandler()
+  }, [cart])
+  // se verifica que el producto no este en el carrito
 
+  const fechdata = async () => {
+    if (session) {
+      const res = await axios.get(
+        "https://fvecommerce.somee.com/api/Usuarios/Favoritos/Usuario",
+        {
+          headers: {
+            Authorization: `Bearer ${session.user.token}`,
+          },
+        }
+      );
+      const check = res.data.find((p) => p.producto.id == product.id);
+      if (check) {
+        setinWishlist(check)
+      }
+      else {
+        setinWishlist(check)
+      }
+    }
+
+  };
+  //verificamos si el producto esta en la wishlist
+  useEffect(() => {
+    fechdata()
+  }, []);
+
+  const removeProduct = (id) => {
+    let newCart = cart.cartItems.filter((p) => {
+      return p._uid != id;
+    });
+    dispatch(updateCart(newCart));
+    inCartHandler()
+  };
 
   const addToCartHandler = async () => {
     // if (!router.query.size) {
@@ -45,7 +95,7 @@ export default function Infos({ product, setActiveImg }) {
       setError("This Product is out of stock.");
       return;
     } else {
-      console.log(data.id)
+      // console.log(data.id)
       let _uid = `${data.id}`;
 
       let exist = cart?.cartItems?.find((p) => p._uid === _uid);
@@ -57,14 +107,14 @@ export default function Infos({ product, setActiveImg }) {
           }
           return p;
         });
-        console.log(newCart)
+        // console.log(newCart)
         dispatch(updateCart(newCart));
       } else {
-        console.log({
-          ...data,
-          qty,
-          _uid,
-        })
+        // console.log({
+        //   ...data,
+        //   qty,
+        //   _uid,
+        // })
         dispatch(
           addToCart({
             ...data,
@@ -79,48 +129,52 @@ export default function Infos({ product, setActiveImg }) {
   const handleWishlist = async () => {
     try {
       if (!session) {
-        return signIn();
+        return router.push("/Signin")
       }
-
-      // Check if the product is already in the wishlist
-      const wishlistProducts = await axios.get(
-        "https://fvecommerce.somee.com/api/Usuarios/Favoritos/Usuario",
-        {
-          headers: {
-            Authorization: `Bearer ${session?.user.token}`,
-          },
+      if (inWishlist) {
+        console.log(inWishlist)
+        try {
+          // delete
+          await axios.delete(
+            `https://fvecommerce.somee.com/api/Usuarios/Favorito/${inWishlist.id}`,
+            {
+              headers: {
+                Authorization: `Bearer ${session?.user.token}`,
+              },
+            }
+          );
+        } catch (error) {
+          console.log(error);
         }
-      );
 
-      const isProductInWishlist = wishlistProducts.data.some(
-        (wishlistItem) => wishlistItem.producto.id === product.id
-      );
+      } else {
+        try {
+          const { data } = await axios.post(
+            "https://fvecommerce.somee.com/api/Usuarios/Favorito",
+            {
+              productoId: product.id,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${session?.user.token}`,
+              },
+            }
+          );
+        } catch (error) {
 
-      if (isProductInWishlist) {
-        console.log("Product already in wishlist, do nothing")
-        return;
+          signOut();
+          router.navigate("/Signin")
+
+        }
       }
-
-      // Add the product to the wishlist
-      const { data } = await axios.post(
-        "https://fvecommerce.somee.com/api/Usuarios/Favorito",
-        {
-          productoId: product.id,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${session?.user.token}`,
-          },
-        }
-      );
-
-      // Handle the response if needed
-
-    } catch (error) {
-      console.log("non")
-      console.log(error)
+      fechdata();
     }
-  };
+    catch (error) {
+      console.log(error);
+    }
+  }
+
+
   // console.log(product)
   return (
     <div className={styles.infos}>
@@ -162,7 +216,7 @@ export default function Infos({ product, setActiveImg }) {
             : product.sizes.reduce((start, next) => start + next.qty, 0)}{" "}
           pieces available.
         </span> */}
-        <div className={styles.infos__sizes}>
+        {/* <div className={styles.infos__sizes}>
           <h4>Select a Size : </h4>
           <div className={styles.infos__sizes_wrap}>
             {/* {product.tamanos.map((size, i) => (
@@ -178,9 +232,9 @@ export default function Infos({ product, setActiveImg }) {
                   {size.size}
                 </div>
               </Link>
-            ))} */}
-          </div>
-        </div>
+            ))} 
+      </div>
+    </div> * /}
         {/* <div className={styles.infos__colors}>
           {product.colors &&
             product.colors.map((color, i) => (
@@ -212,14 +266,18 @@ export default function Infos({ product, setActiveImg }) {
           <button
             disabled={product.stock < 1}
             style={{ cursor: `${product.stock < 1 ? "not-allowed" : ""}` }}
-            onClick={() => addToCartHandler()}
+            onClick={() => inCart ? removeProduct(product.id) : addToCartHandler()}
           >
             <BsHandbagFill />
-            <b>ADD TO CART</b>
+            <b>
+
+              {inCart ? "IN CART" : "ADD TO CART"}
+            </b>
+            {/* ADD TO CART</b> */}
           </button>
           <button onClick={() => handleWishlist()}>
             <BsHeart />
-            WISHLIST
+            <b>{inWishlist ? "IN WISHLIST" : "ADD TO WISHLIST"}</b>
           </button>
         </div>
         {error && <span className={styles.error}>{error}</span>}
@@ -227,7 +285,7 @@ export default function Infos({ product, setActiveImg }) {
         <Share />
         <Accordian details={[product.descripcion]} Puntos={product.sumaDePuntos} />
         <SimillarSwiper />
-      </div>
-    </div>
+      </div >
+    </div >
   );
 }

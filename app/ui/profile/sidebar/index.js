@@ -3,7 +3,10 @@ import { sidebarData } from "../../../data/profile";
 import Item from "./Item";
 import styles from "./styles.module.scss";
 import { Helmet } from 'react-helmet';
-export default function Sidebar({ data, address }) {
+
+export default function Sidebar({ isUser, data, address }) {
+
+
   // console.log(address);
   const partesFecha = data.fechaPublicado.split('T');
 

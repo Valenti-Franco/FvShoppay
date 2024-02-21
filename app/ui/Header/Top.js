@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useState } from "react";
 import UserMenu from "./UserMenu";
 import { useSession } from "next-auth/react";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function Top({ country }) {
   const { data: session } = useSession();
@@ -20,11 +21,17 @@ export default function Top({ country }) {
       <div className={styles.top__container}>
         <div></div>
         <ul className={styles.top__list}>
-          <li className={styles.li}>
+          <motion.li
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+
+            className={styles.li}
+
+          >
             <img src={country?.flag} alt="" />
             <span>{country?.name} / USD</span>
-          </li>
-          <li className={styles.li}>
+          </motion.li>
+          {/* <li className={styles.li}>
             <MdSecurity />
             <span>Buyer Protection</span>
           </li>
@@ -33,13 +40,17 @@ export default function Top({ country }) {
           </li>
           <li className={styles.li}>
             <span>Help</span>
-          </li>
-          <li className={styles.li}>
+          </li> */}
+          <motion.li
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+
+            className={styles.li}>
             <BsSuitHeartFill style={{ fill: 'red' }} />
             <Link href="/profile/wishlist">
               <span>Wishlist</span>
             </Link>
-          </li>
+          </motion.li>
           <ul className={styles.li} onMouseOver={() => setVisible(true)} onMouseLeave={() => setVisible(false)}>
 
             {session ? (
@@ -61,8 +72,10 @@ export default function Top({ country }) {
               </li>
             )
             }
+            <AnimatePresence>
 
-            {visible && <UserMenu session={session} />}
+              {visible && <UserMenu session={session} />}
+            </AnimatePresence>
 
           </ul>
         </ul>

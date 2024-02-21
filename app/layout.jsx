@@ -7,7 +7,7 @@ import ProviderBar from "./context/ProviderBar";
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
+      <body className="  w-vw min-h-screen" style={{ contain: "content" }}>
         {/* <h1>Root Layout</h1> */}
         <SessionContext>
           <Header />

@@ -1,7 +1,7 @@
 
 import { simillar_products } from "../../../data/products";
 import styles from "./styles.module.scss";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -15,29 +15,42 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper";
 import Link from "next/link";
 import Image from "next/image";
+import axios from "axios";
 export default function SimillarSwiper() {
+  const [products, setproducts] = useState([]);
+  const getProducts = async () => {
+    const res = await axios.get("https://fvecommerce.somee.com/api/Productos");
+    setproducts(res.data);
+    console.log(res.data)
+  }
+  useEffect(() => {
+    getProducts();
+  }, [])
+
   return (
-    <Swiper
-      slidesPerView={4}
-      spaceBetween={5}
-      slidesPerGroup={3}
-      navigation={true}
-      modules={[Navigation]}
-      className="swiper simillar_swiper products__swiper"
-      breakpoints={{
-        640: {
-          width: 640,
-          slidesPerView: 5,
-        },
-      }}
-    >
-      {simillar_products.map((p, index) => (
-        <SwiperSlide key={index}>
-          <Link href="">
-            <Image width={100} height={100} src={p} alt="" />
-          </Link>
-        </SwiperSlide>
-      ))}
-    </Swiper>
+    products.length > 0 && (
+      <Swiper
+        slidesPerView={4}
+        spaceBetween={5}
+        slidesPerGroup={3}
+        navigation={true}
+        modules={[Navigation]}
+        className="swiper simillar_swiper products__swiper"
+        breakpoints={{
+          640: {
+            width: 640,
+            slidesPerView: 5,
+          },
+        }}
+      >
+        {products.map((product, index) => (
+          <SwiperSlide key={product.id}>
+            <Link style={{ width: "100px", height: "300px", margin: "auto" }} href={`/product/${product.id}`}>
+              <Image className=" object-fill" width={100} height={300} src={product?.imagenes[0].url} alt="" />
+            </Link>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    )
   );
 }

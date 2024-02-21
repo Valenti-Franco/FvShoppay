@@ -75,7 +75,7 @@ export default function Accordian({ details, Puntos }) {
           ))}
         </AccordionDetails>
       </Accordion>
-      <Accordion
+      {/* <Accordion
         expanded={expanded === "panel2"}
         onChange={handleChange("panel2")}
         className={styles.accordian}
@@ -89,11 +89,11 @@ export default function Accordian({ details, Puntos }) {
         </AccordionSummary>
         <AccordionDetails>
           <div className={styles.infos__accordian_grid}>
-            {Puntos} Estrellas
+            {Puntos} Stars
 
           </div>
         </AccordionDetails>
-      </Accordion>
+      </Accordion> */}
     </div>
   );
 }

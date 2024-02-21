@@ -92,7 +92,7 @@ export default function PageSignin({
       .oneOf([Yup.ref("password")], "Passwords must match."),
   });
   const signUpHandler = async (e) => {
-    console.log(name, email, password);
+    // console.log(name, email, password);
     try {
       setLoading(true);
       const { data } = await axios.post(
@@ -236,7 +236,10 @@ export default function PageSignin({
                   />
                   <CircledIconBtn type="submit" text="Sign in" />
                   {login_error && (
-                    <span className={styles.error}>{login_error} </span>
+                    //mensaje a mano
+                    <span className={styles.error}>
+                      password or email incorrect
+                    </span>
                   )}
                   <div className={styles.forgot}>
                     <Link href="/auth/forgot">Forgot password ?</Link>
@@ -244,7 +247,7 @@ export default function PageSignin({
                 </Form>
               )}
             </Formik>
-            <div className={styles.login__socials}>
+            {/* <div className={styles.login__socials}>
               <span className={styles.or}>Or continue with</span>
               <div className={styles.login__socials_wrap}>
                 {/* {providers.map((provider) => {
@@ -262,9 +265,9 @@ export default function PageSignin({
                       </button>
                     </div>
                   );
-                })} */}
+                })} 
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className={styles.login__container}>

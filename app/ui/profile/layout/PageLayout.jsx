@@ -5,8 +5,20 @@ import Head from "next/head";
 import Sidebar from "../sidebar";
 import { useSession } from "next-auth/react";
 import { Helmet } from "react-helmet";
-export default function Layout({ user, address, children }) {
-  // const { data: session, status } = useSession();
+import { redirect, useRouter } from "next/navigation";
+import { signOut } from "next-auth/react";
+import { useEffect } from "react";
+export default function Layout({ isUser, user, address, children }) {
+  const router = useRouter();
+  const { data: session, status } = useSession();
+  // si isUser es falso, se redirige a la página de inicio y se cierra sesión
+  console.log(isUser);
+  if (!isUser) {
+    if (session) {
+      signOut();
+    }
+    router.push("/Signin");
+  }
 
   return (
     <div className={styles.layout}>

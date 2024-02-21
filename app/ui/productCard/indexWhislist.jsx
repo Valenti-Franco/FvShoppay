@@ -27,7 +27,7 @@ export default function ProductCard() {
       );
       // Si la solicitud fue exitosa, actualiza las direcciones en el estado
       fetchData();
-      // console.log(ordersData.data);
+      console.log(ordersData);
     } catch (error) {
       // Manejar errores
       console.error("Error al cambiar la dirección activa:", error);

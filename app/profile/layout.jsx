@@ -1,14 +1,16 @@
 import React from "react";
 import LayoutPerfil from "../ui/profile/layout/PageLayout";
-import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import axios from "axios";
+import { redirect } from "next/navigation";
+import { signOut } from "next-auth/react";
 
 const layout = async ({ children }) => {
   let user;
   let address;
   let session;
+  let isUser = true;
 
   try {
     session = await getServerSession({
@@ -72,8 +74,10 @@ const layout = async ({ children }) => {
       secret: process.env.JWT_SECRET,
     });
   } catch (error) {
-    console.error("Error during getServerSession:");
-    redirect("/");
+    // isUser = false;
+    // console.error("Error during getServerSession:");
+    // signOut();
+    // redirect("/");
   }
 
   try {
@@ -86,8 +90,10 @@ const layout = async ({ children }) => {
       }
     );
   } catch (error) {
-    console.error("Error during user and address retrieval:");
-    redirect("/");
+    isUser = false;
+
+    // signOut();
+    // redirect("/");
 
     // Handle the error as needed
   }
@@ -107,7 +113,11 @@ const layout = async ({ children }) => {
 
   return (
     <>
-      <LayoutPerfil user={user.data} address={user.data.dirreccion}>
+      <LayoutPerfil
+        isUser={isUser}
+        user={user?.data}
+        address={user?.data.dirreccion}
+      >
         {children}
       </LayoutPerfil>
     </>

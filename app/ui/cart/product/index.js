@@ -1,6 +1,8 @@
 "use client"
 import styles from "./styles.module.scss";
+import { BsHeartFill } from "react-icons/bs"
 import { BsHeart } from "react-icons/bs";
+
 import { AiOutlineDelete } from "react-icons/ai";
 import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,11 +10,39 @@ import { updateCart } from "../../../../store/cartSlice";
 import storeImg from "../../../../public/store.webp"
 import { useState, useEffect } from "react";
 import Image from "next/image";
-export default function Product({ product, selected, setSelected }) {
+import axios from "axios";
+import { useSession } from "next-auth/react";
+
+export default function Product({ favs, product, selected, setSelected }) {
+  const { data: session } = useSession();
+  const [favorites, setFavorites] = useState(favs);
+  const [isFav, setIsFav] = useState(false);
   const { cart } = useSelector((state) => ({ ...state }));
   const [active, setActive] = useState();
 
+  const fechdata = async () => {
+    const res = await axios.get(
+      "https://fvecommerce.somee.com/api/Usuarios/Favoritos/Usuario",
+      {
+        headers: {
+          Authorization: `Bearer ${session.user.token}`,
+        },
+      }
+    );
+    setFavorites(res.data);
+  };
   // console.log("active:", cart);
+  // se verifica si esta el producto en los favs
+  useEffect(() => {
+    fechdata()
+  }, []);
+  useEffect(() => {
+
+    const check = favorites.find((p) => p.producto.id == product._uid);
+    setIsFav(check);
+  }, [favorites]);
+
+
   useEffect(() => {
     const check = selected.find((p) => p._uid == product._uid);
     setActive(check);
@@ -48,6 +78,51 @@ export default function Product({ product, selected, setSelected }) {
   };
 
 
+  const handleFav = async () => {
+    if (isFav) {
+      // https://fvecommerce.somee.com/api/Usuarios/Favorito/12
+      try {
+        try {
+          const res = await axios.delete(
+            `https://fvecommerce.somee.com/api/Usuarios/Favorito/${isFav?.id}`,
+            {
+              headers: {
+                Authorization: `Bearer ${session?.user.token}`,
+              },
+            }
+          );
+
+        } catch (error) {
+          console.log(error);
+        }
+
+        fechdata();
+
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      // agregar a favoritos
+      try {
+        await axios.post(
+          "https://fvecommerce.somee.com/api/Usuarios/Favorito",
+          {
+            productoId: product._uid,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${session.user.token}`,
+            },
+          }
+        );
+        fechdata();
+
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
   return (
     <div className={`${styles.card} ${styles.product}`}>
       {product.quantity < 1 && <div className={styles.blur}></div>}
@@ -66,10 +141,12 @@ export default function Product({ product, selected, setSelected }) {
             <h1>
               {product.nombre.length > 30
                 ? `${product.nombre.substring(0, 30)}`
-                : product.name}
+                : product.nombre}
             </h1>
-            <div style={{ zIndex: "2" }}>
-              <BsHeart />
+            <div style={{ zIndex: "2" }}
+              onClick={() => handleFav()}
+            >
+              {isFav ? <BsHeartFill style={{ fill: "red" }} /> : <BsHeart />}
             </div>
             <div
               style={{ zIndex: "2" }}

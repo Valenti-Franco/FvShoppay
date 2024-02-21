@@ -40,14 +40,19 @@ const ProductPage = () => {
     fetchProduct();
   }, [id]);
   // console.log(id.id);
+  //obtener productos del carrito
 
   return (
     <>
       {product.precio && product.nombre ? (
         <>
           <Helmet>
-            <title>Home / Product / {product.nombre}</title>
-            <meta property="og:title" content="My page title" key="title" />
+            <title>Product - {product.nombre}</title>
+            <meta
+              property="og:title"
+              content="FV Shoppay / Products"
+              key="title"
+            />
             <link rel="icon" href="/favicon.ico" />
           </Helmet>
           {/* <Header country={country} /> */}

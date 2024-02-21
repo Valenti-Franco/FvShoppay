@@ -19,7 +19,7 @@ import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 // import { saveCart } from "../requests/user";
 
-const CartPage = () => {
+const CartPage = ({ favs }) => {
   const { data: session } = useSession();
   const [selected, setSelected] = useState([]);
   const { cart } = useSelector((state) => ({ ...state }));
@@ -52,7 +52,7 @@ const CartPage = () => {
   return (
     <div className={styles.cart}>
       <head>
-        <title>Cart</title>
+        <title>Cart - FV Shoppay</title>
         <meta property="og:title" content="My page title" key="title" />
         <link rel="icon" href="/favicon.ico" />
       </head>
@@ -66,6 +66,7 @@ const CartPage = () => {
           <div className={styles.cart__products}>
             {cart.cartItems.map((product) => (
               <Product
+                favs={favs}
                 product={product}
                 key={product._uid}
                 selected={selected}
