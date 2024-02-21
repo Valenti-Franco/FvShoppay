@@ -5,7 +5,7 @@ import { FaMinus } from "react-icons/fa";
 import styles from "../styles.module.scss";
 import Link from "next/link";
 import { MdInvertColors, MdSearch } from "react-icons/md";
-import UpdateQueryString from "../updateQueryString";
+import UpdateQueryString from "../UpdateQueryString";
 export default function ColorsFilter({ colors }) {
   const { colorid, updateQueryString } = UpdateQueryString();
   const [show, setShow] = useState(false);

@@ -6,7 +6,7 @@ import styles from "../styles.module.scss";
 
 import Card from "./Card";
 import { MdCategory, MdSearch } from "react-icons/md";
-import UpdateQueryString from "../updateQueryString";
+import UpdateQueryString from "../UpdateQueryString";
 export default function CategoryFilter({ categories }) {
 
   const { SubCategory, updateQueryString } = UpdateQueryString()

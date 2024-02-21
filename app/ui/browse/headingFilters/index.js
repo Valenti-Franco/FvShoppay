@@ -7,7 +7,7 @@ import { BsCheckLg } from "react-icons/bs";
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import UpdateQueryString from "../updateQueryString";
+import UpdateQueryString from "../UpdateQueryString";
 // import { useRouter } from "next/router";
 
 export default function HeadingFilters({

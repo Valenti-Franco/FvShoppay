@@ -8,7 +8,7 @@ import Link from "next/link";
 // import { useRouter } from "next/router";
 import { TbBrandAuth0 } from "react-icons/tb";
 import { MdSearch } from "react-icons/md";
-import UpdateQueryString from "../updateQueryString";
+import UpdateQueryString from "../UpdateQueryString";
 
 export default function BrandsFilter({ brands }) {
   const router = useRouter();

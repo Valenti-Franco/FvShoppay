@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import styles from "../../../styles/browse.module.scss";
-import UpdateQueryString from "./updateQueryString";
+import UpdateQueryString from "./UpdateQueryString";
 const ClearFilter = () => {
   const { totalFilters } = UpdateQueryString();
   return (

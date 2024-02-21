@@ -8,7 +8,7 @@ import Size from "./Size";
 import Link from "next/link";
 import { GiResize } from "react-icons/gi";
 import { MdSearch } from "react-icons/md";
-import UpdateQueryString from "../updateQueryString";
+import UpdateQueryString from "../UpdateQueryString";
 import { string } from "zod";
 export default function SizesFilter({ sizes }) {
   const { sizeid, updateQueryString } = UpdateQueryString();

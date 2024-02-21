@@ -6,7 +6,7 @@ import axios from "axios";
 import { Suspense, useEffect, useState } from "react";
 import ProductCardItem from "./ProductCardItem";
 import { SwiperSlide } from "swiper/react";
-import UpdateQueryString from "../browse/updateQueryString";
+import UpdateQueryString from "../browse/UpdateQueryString";
 
 export default function ProductFilters() {
   const [products, setProducts] = useState([]);
