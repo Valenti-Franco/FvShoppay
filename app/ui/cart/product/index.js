@@ -34,7 +34,11 @@ export default function Product({ favs, product, selected, setSelected }) {
   // console.log("active:", cart);
   // se verifica si esta el producto en los favs
   useEffect(() => {
-    fechdata()
+
+    if (session !== null) {
+
+      fechdata()
+    }
   }, []);
   useEffect(() => {
 

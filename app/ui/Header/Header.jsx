@@ -111,17 +111,17 @@ const Header = () => {
   //   { label: "Pulp Fiction", year: 1994 },
   // ];
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    console.log(query);
-    if (query) {
-      router.refresh();
+  // const handleSearch = (e) => {
+  //   e.preventDefault();
+  //   console.log(query);
+  //   if (query) {
+  //     router.refresh();
 
-      router.push(`/browse?search=${query}`);
-      console.log(query);
-    }
-    // ();
-  };
+  //     router.push(`/browse?search=${query}`);
+  //     console.log(query);
+  //   }
+  //   // ();
+  // };
   const handleAutocompleteChange = (event, value) => {
     // 'value' is the selected option from Autocomplete
     setQuery(value || ""); // Set the query to the selected value or an empty string if nothing is selected
@@ -147,7 +147,7 @@ const Header = () => {
             <Image width={120} height={50} src={logo.src} />
           </Link>
           <div className="flex items-center w-full">
-            <form onSubmit={(e) => handleSearch(e)} className={styles.search}>
+            <div className={styles.search}>
               {/* <input
               className={styles.inputSeach}
               type="text"
@@ -174,15 +174,15 @@ const Header = () => {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
               >
-                <Link
+                <a
                   href={`/browse?search=${query ? query : "all"}`}
-                  type="submit"
+                  // type="submit"
                   className={styles.search__icon}
                 >
                   <RiSearch2Line />
-                </Link>
+                </a>
               </motion.button>
-            </form>
+            </div>
             <Link className={styles.cart} href="/cart">
               <motion.button
                 whileHover={{ scale: 1.1 }}
