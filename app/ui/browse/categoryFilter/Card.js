@@ -5,7 +5,7 @@ import { FaMinus } from "react-icons/fa";
 import { useState } from "react";
 import { MdSearch } from "react-icons/md";
 
-export default function Card({ category, categoryHandler, replaceQuery, updateQueryString, selectedSubcategory, onSubcategoryChange }) {
+export default function Card({ category, updateQueryString, selectedSubcategory, onSubcategoryChange }) {
   const [show, setShow] = useState(false);
   // const check = replaceQuery("category", category._id);
   return (
@@ -20,7 +20,7 @@ export default function Card({ category, categoryHandler, replaceQuery, updateQu
         {show ?
           category.subCategory.map((subcategory, i) =>
             <>
-              <Subcategory categoryHandler={categoryHandler}
+              <Subcategory
                 key={subcategory.id}
                 subcategory={subcategory}
                 selectedSubcategory={selectedSubcategory}

@@ -2,7 +2,7 @@ import styles from "../styles.module.scss";
 import { BsPlusLg } from "react-icons/bs";
 import { FaMinus } from "react-icons/fa";
 import { useState } from "react";
-export default function Subcategory({ subcategory, updateQueryString, categoryHandler, selectedSubcategory, onSubcategoryChange }) {
+export default function Subcategory({ subcategory, updateQueryString, selectedSubcategory, onSubcategoryChange }) {
   const [show, setShow] = useState(false);
   const handleCheckboxChange = () => {
     // Actualizar la subcategoría seleccionada en el componente padre

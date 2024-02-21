@@ -8,9 +8,13 @@ import Link from "next/link";
 // import { useRouter } from "next/router";
 import { TbBrandAuth0 } from "react-icons/tb";
 import { MdSearch } from "react-icons/md";
+import UpdateQueryString from "../updateQueryString";
 
-export default function BrandsFilter({ brands, brand, brandHandler, updateQueryString, replaceQuery }) {
+export default function BrandsFilter({ brands }) {
   const router = useRouter();
+  const { brand, updateQueryString } = UpdateQueryString();
+  // brand={brand}
+  // updateQueryString={updateQueryString}
   const [show, setShow] = useState(false);
 
   const [selectedBrand, setSelectedBrand] = useState(brand ? parseInt(brand) : "");

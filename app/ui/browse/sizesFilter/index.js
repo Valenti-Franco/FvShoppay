@@ -5,22 +5,22 @@ import { BsPlusLg } from "react-icons/bs";
 import { FaMinus } from "react-icons/fa";
 import styles from "../styles.module.scss";
 import Size from "./Size";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { GiResize } from "react-icons/gi";
 import { MdSearch } from "react-icons/md";
-
-export default function SizesFilter({ sizes, sizeid, sizeHandler, updateQueryString }) {
-  const router = useRouter();
+import UpdateQueryString from "../updateQueryString";
+import { string } from "zod";
+export default function SizesFilter({ sizes }) {
+  const { sizeid, updateQueryString } = UpdateQueryString();
 
   const [show, setShow] = useState(false);
 
-  const [selectedSizes, setSelectedSizes] = useState([]);
+  console.log(sizeid)
+  const [selectedSizes, setSelectedSizes] = useState(sizeid);
 
   const handleSizeChange = (selectedSize) => {
     // Check if the current size is already selected
-    const index = selectedSizes.indexOf(selectedSize);
-
+    const index = selectedSizes.indexOf(selectedSize.toString());
     if (index !== -1) {
       // If the size is already selected, remove it
       setSelectedSizes((prevSizes) => [
@@ -29,16 +29,11 @@ export default function SizesFilter({ sizes, sizeid, sizeHandler, updateQueryStr
       ]);
     } else {
       // If the size is not selected, add it
-      setSelectedSizes((prevSizes) => [...prevSizes, selectedSize]);
+      setSelectedSizes((prevSizes) => [...prevSizes, selectedSize.toString()]);
     }
   };
 
-  const handleApplyFilters = () => {
-    // Do something with the selected sizes, e.g., update the URL
-    const queryString = selectedSizes.map((size) => `idDetallesTamano=${size}`).join("&");
-    // router.push(`?${queryString}`);
-    updateQueryString(selectedSizes, "size")
-  };
+
   return (
     <div className={styles.filter}>
       {/* <h3>

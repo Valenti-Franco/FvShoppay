@@ -7,17 +7,13 @@ import { BsCheckLg } from "react-icons/bs";
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import UpdateQueryString from "../updateQueryString";
 // import { useRouter } from "next/router";
 
 export default function HeadingFilters({
-  updateQueryString,
-  minPrice,
-  maxPrice
-  // shippingHandler,
-  // replaceQuery,
-  // ratingHandler,
-  // sortHandler,
+
 }) {
+  const { minPrice, maxPrice, updateQueryString } = UpdateQueryString();
   const router = useRouter();
   const [show, setShow] = useState(false);
 

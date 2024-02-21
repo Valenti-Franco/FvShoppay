@@ -5,7 +5,9 @@ import { FaMinus } from "react-icons/fa";
 import styles from "../styles.module.scss";
 import Link from "next/link";
 import { MdInvertColors, MdSearch } from "react-icons/md";
-export default function ColorsFilter({ colors, colorid, colorHandler, replaceQuery, updateQueryString }) {
+import UpdateQueryString from "../updateQueryString";
+export default function ColorsFilter({ colors }) {
+  const { colorid, updateQueryString } = UpdateQueryString();
   const [show, setShow] = useState(false);
 
   const [selectedColors, setSelectedColors] = useState([]);
@@ -14,7 +16,7 @@ export default function ColorsFilter({ colors, colorid, colorHandler, replaceQue
     // Convierte los números en colorid a enteros y filtra los colores correspondientes
     const initialSelectedColorIds = colorid.map(id => parseInt(id, 10));
     setSelectedColors(initialSelectedColorIds);
-  }, [colorid]);
+  }, []);
 
   const handleColorsChange = (selectedColorId) => {
     // Check if the current color ID is already selected

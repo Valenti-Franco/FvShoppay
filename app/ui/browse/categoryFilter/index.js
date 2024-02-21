@@ -6,8 +6,10 @@ import styles from "../styles.module.scss";
 
 import Card from "./Card";
 import { MdCategory, MdSearch } from "react-icons/md";
-export default function CategoryFilter({ categories, subCategories, categoryHandler, replaceQuery, updateQueryString, SubCategory }) {
+import UpdateQueryString from "../updateQueryString";
+export default function CategoryFilter({ categories }) {
 
+  const { SubCategory, updateQueryString } = UpdateQueryString()
 
   const [show, setShow] = useState(false);
   const [selectedSubcategory, setSelectedSubcategory] = useState(SubCategory?.length ? [parseInt(SubCategory[0])] : []);
@@ -28,9 +30,7 @@ export default function CategoryFilter({ categories, subCategories, categoryHand
           <Card
             key={i}
             category={category}
-            subCategories={subCategories}
-            categoryHandler={categoryHandler}
-            replaceQuery={replaceQuery}
+
             updateQueryString={updateQueryString}
             selectedSubcategory={selectedSubcategory}
             onSubcategoryChange={handleSubcategoryChange}

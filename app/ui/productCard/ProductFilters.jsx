@@ -1,33 +1,29 @@
+"use client";
 import Link from "next/link";
 import ProductSwiper from "./ProductSwiper";
 import styles from "./styles.module.scss";
 import axios from "axios";
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
 import ProductCardItem from "./ProductCardItem";
 import { SwiperSlide } from "swiper/react";
+import UpdateQueryString from "../browse/updateQueryString";
 
-export default async function ProductFilters({
-  search,
-  brand,
-  size,
-  color,
-  minPrice,
-  maxPrice,
-  SubCategory,
-}) {
-  // console.log("search ------------------->", search);
-  // console.log(size);
+export default function ProductFilters() {
+  const [products, setProducts] = useState([]);
+
+  const { search, sizeid, colorid, brand, minPrice, maxPrice, SubCategory } =
+    UpdateQueryString();
   let sizesQuery = false;
   let colorQuery = false;
   let brandQuery = false;
   let SubCategoryQuery = false;
 
-  if (size.length > 0) {
-    sizesQuery = size.map((size) => `idDetallesTamano=${size}`).join("&");
+  if (sizeid.length > 0) {
+    sizesQuery = sizeid.map((size) => `idDetallesTamano=${size}`).join("&");
   }
 
-  if (color.length > 0) {
-    colorQuery = color.map((color) => `idColores=${color}`).join("&");
+  if (colorid.length > 0) {
+    colorQuery = colorid.map((color) => `idColores=${color}`).join("&");
   }
   if (brand.length > 0) {
     brandQuery = brand.map((brand) => `idMarca=${brand}`);
@@ -44,10 +40,21 @@ export default async function ProductFilters({
 
   const separator = sizesQuery && colorQuery ? "&" : "";
 
-  const url = `https://fvecommerce.somee.com/api/Productos/Filtrar?${queryParams}&pagina=1&tamanoPagina=10&nombre=${search}`;
+  const dataFetch = async () => {
+    try {
+      const url = `https://fvecommerce.somee.com/api/Productos/Filtrar?${queryParams}&pagina=1&tamanoPagina=10&nombre=${search}`;
+      const response = await axios.get(url);
+      const products = response.data;
+      console.log(products);
+      setProducts(products);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-  const response = await axios.get(url);
-  const products = response.data;
+  useEffect(() => {
+    dataFetch();
+  }, []);
   // function delay(ms) {
   //   return new Promise(resolve => setTimeout(resolve, ms));
   // }

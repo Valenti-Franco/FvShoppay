@@ -1,6 +1,7 @@
-import React from "react";
+import React, { Suspense } from "react";
 import PageBrowse from "../ui/browse/PageBrowse";
 import axios from "axios";
+import BrowserPlaceholder from "../ui/browse/BrowserPlaceholder";
 const page = async () => {
   const responseCategory = await axios.get(
     `https://fvecommerce.somee.com/api/Category`
@@ -23,12 +24,14 @@ const page = async () => {
   const brands = responseBrand.data;
 
   return (
-    <PageBrowse
-      categories={categories}
-      brands={brands}
-      sizes={sizes}
-      colors={colors}
-    />
+    <Suspense fallback={<BrowserPlaceholder />}>
+      <PageBrowse
+        categories={categories}
+        brands={brands}
+        sizes={sizes}
+        colors={colors}
+      />
+    </Suspense>
   );
 };
 

@@ -5,15 +5,21 @@ import { FaMinus } from "react-icons/fa";
 import { useEffect, useState } from "react";
 export default function Size({ size, sizeHandler, sizeid }) {
   const [isChecked, setIsChecked] = useState(false);
-
+  // console.log(size)
+  // console.log(sizeid)
   useEffect(() => {
     // Check if the current size.id is present in sizeid array
     setIsChecked(sizeid.includes(String(size.id)));
-  }, [sizeid, size.id]);
+
+    // console.log(isChecked)
+  }, []);
 
   const handleSizeChange = () => {
     setIsChecked(!isChecked);
-    sizeHandler(size.id); // Call the sizeHandler function with the size ID
+    sizeHandler(size.id);
+    // console.log(size.id)
+    // Call the sizeHandler function with the size ID
+    // console.log(isChecked)
   };
 
 
