@@ -16,7 +16,7 @@ export const sidebarData = [
       },
       {
         name: "Account Security",
-        link: "/profile/security",
+        link: "/profile",
       },
     ],
   },
@@ -75,7 +75,7 @@ export const sidebarData = [
       },
       {
         name: " Viewed",
-        link: "/profile/recent",
+        link: "/profile",
       },
     ],
   },
@@ -84,11 +84,11 @@ export const sidebarData = [
     links: [
       {
         name: "My Message",
-        link: "/profile/messages",
+        link: "/profile",
       },
       {
         name: "Service Records",
-        link: "/profile/services",
+        link: "/profile",
       },
     ],
   },
