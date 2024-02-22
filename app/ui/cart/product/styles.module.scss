@@ -130,7 +130,13 @@
 }
 
 .col{
-  width: 100px;
+  @media screen and (max-width: 500px){
+    
+    width: 150px;
+  }
+  @media screen and (min-width: 500px){
+    width: 100%;
+  }
   display: flex;
   flex-direction: column !important;
 }
