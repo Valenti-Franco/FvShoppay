@@ -15,7 +15,7 @@ import { Navigation } from "swiper";
 import { flashDealsArray } from "../../data/home";
 import FlashCard from "./Card";
 
-export default async function FlashDeals() {
+export default function FlashDeals() {
 
 
   return (

@@ -3,6 +3,10 @@
   @media (min-width: 900px) {
     height: 140px;
   }
+  @media (max-width: 900px) {
+    
+    width: calc(100vw - 2rem);
+  }
 }
 .flex {
   gap: 10px;

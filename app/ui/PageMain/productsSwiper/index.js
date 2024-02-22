@@ -28,7 +28,6 @@ export default function ProductsSwiper({ header, products, bg, category }) {
         spaceBetween={10}
         navigation={true}
         modules={[Navigation]}
-        className="products__swiper"
         breakpoints={{
           450: {
             slidesPerView: 2,
@@ -70,6 +69,6 @@ export default function ProductsSwiper({ header, products, bg, category }) {
           ))}
       </Swiper>
 
-    </div>
+    </div >
   );
 }

@@ -1,5 +1,6 @@
 @import "../base";
 .product {
+  
   position: relative;
   display: flex;
   flex-direction: column;
@@ -126,4 +127,10 @@
   font-size: 15px;
   padding-left: 2rem;
   z-index: 2;
+}
+
+.col{
+  width: 100px;
+  display: flex;
+  flex-direction: column !important;
 }
