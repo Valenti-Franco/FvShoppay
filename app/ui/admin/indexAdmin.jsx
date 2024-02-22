@@ -230,7 +230,14 @@ export default function IndexAdmin() {
                   <tr key={user.id}>
                     <td className={styles.user}>
                       <div className={styles.user__img}>
-                        <img src={user.imagen?.url} alt="" />
+                        <img
+                          src={
+                            user.imagen
+                              ? user.imagen.url
+                              : "https://res.cloudinary.com/deh35rofi/image/upload/v1698237266/blank-profile-picture-973460_1280_rvjszn.jpg"
+                          }
+                          alt=""
+                        />
                       </div>
                       <td>
                         <h4>{user.nobre}</h4>
