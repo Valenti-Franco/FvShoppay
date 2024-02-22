@@ -787,7 +787,7 @@ export default function Create() {
                 <div>
                   <div className="flex gap-9 flex-row">
                     {size?.map((size) => {
-                      if (size.subcategoryId === product.subCategories) {
+                      if (size.subcategoryId == product.subCategories) {
                         return size.detalleTamanos?.map((detailsize) => (
                           <>
                             <label
